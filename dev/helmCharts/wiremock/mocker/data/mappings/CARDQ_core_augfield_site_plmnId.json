@@ -1,0 +1,291 @@
+{
+  "mappings": [
+    {
+      "name": "CARDQ_200_site_plmnId_with_snssai_startWith1",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^1-[0-9]*"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "site"
+                },
+                {
+                  "name": "plmnId"
+                }
+              ],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_site_plmnId_fields_1.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_site_plmnId_with_snssai_startWith3",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^3-[0-9]*"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "site"
+                },
+                {
+                  "name": "plmnId"
+                }
+              ],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_site_plmnId_fields_2.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_site_plmnId_with_snssai_startWith5",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^5-[0-9]*"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "site"
+                },
+                {
+                  "name": "plmnId"
+                }
+              ],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_site_plmnId_fields_3.json"
+      }
+    },
+    {
+      "name": "CARDQ_400_site_plmnId_with_snssai",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "400-bad"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "site"
+                },
+                {
+                  "name": "plmnId"
+                }
+              ],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Malformed Request, IllegalArgumentException",
+          "status": 400,
+          "detail": "Malformed Request, Reason: Invalid query type, notcoreorran",
+          "instance": null
+        }
+      }
+    },
+    {
+      "name": "CARDQ_500_site_plmnId_with_snssai",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "500-bad"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "site"
+                },
+                {
+                  "name": "plmnId"
+                }
+              ],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.",
+          "status": 500,
+          "detail": "Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.",
+          "instance": null
+        }
+      }
+    },
+    {
+      "priority": 10,
+      "name": "CARDQ_200_site_plmnId_with_any_string",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "site"
+                },
+                {
+                  "name": "plmnId"
+                }
+              ],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_site_plmnId_fields.json"
+      }
+    }
+  ]
+}

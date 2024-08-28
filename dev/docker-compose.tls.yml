@@ -1,0 +1,49 @@
+#
+# COPYRIGHT Ericsson 2023
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+version: '3'
+services:
+  wiremocker:
+    image: wiremock/wiremock
+    ports:
+      - 8443:8443
+    volumes:
+      - ./certs/wiremock:/certs
+    command:
+      - "--https-port"
+      - "8443"
+      - "--https-keystore"
+      - "/certs/keystore.jks"
+      - "--https-require-client-cert"
+      - "true"
+      - "--https-truststore"
+      - "/certs/truststore.jks"
+      - "--verbose"
+
+  kafka:
+    ports:
+      - 9993:9993
+      - 9092:9092
+    volumes:
+      - ./certs/kafka:/etc/kafka/secrets
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,SSL://localhost:9993
+      KAFKA_SSL_CLIENT_AUTH: 'required'
+      KAFKA_SSL_KEYSTORE_FILENAME: 'keystore.jks'
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: 'kafka_credentials'
+      KAFKA_SSL_KEY_CREDENTIALS: 'kafka_credentials'
+      KAFKA_SSL_TRUSTSTORE_FILENAME: 'truststore.jks'
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: 'kafka_credentials'

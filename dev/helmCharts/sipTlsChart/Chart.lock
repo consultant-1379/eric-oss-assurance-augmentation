@@ -1,0 +1,12 @@
+dependencies:
+- name: eric-data-distributed-coordinator-ed
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-released-helm
+  version: 10.1.0+15
+- name: eric-sec-key-management
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-released-helm
+  version: 7.1.0+19
+- name: eric-sec-sip-tls
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-released-helm
+  version: 9.0.0+23
+digest: sha256:26371fa0826a0fc7644092cb9ae8bbb7dadc30a20f211a4c05f6bb5e55159c57
+generated: "2023-11-07T17:38:05.374156-05:00"

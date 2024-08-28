@@ -1,0 +1,27 @@
+{
+  "id": "00e01a30-9e6f-11ed-a8fc-0242ac120002",
+  "name": "DC_get_v1_data_type_200",
+  "request": {
+    "urlPath": "/catalog/v1/data-type",
+    "method": "GET",
+    "queryParameters": {
+      "dataSpace": {
+        "equalTo": "5G"
+      },
+      "dataCategory": {
+        "equalTo": "PM_COUNTERS"
+      },
+      "schemaName": {
+        "equalTo": "AMF_Mobility_NetworkSlice_1"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "data_catalog_pm_stats_response_v1.json"
+  }
+}

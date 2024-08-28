@@ -1,0 +1,355 @@
+{
+  "mappings": [
+    {
+      "name": "CARDQ_400_invalid_queryType",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "nsi"
+                },
+                {
+                  "name": "ag"
+                }
+              ],
+              "queryType": "${json-unit.regex}^(?!core$|ran$).*"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response" : {
+        "status" : 400,
+        "headers" : {
+          "Content-Type" : "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Malformed Request, IllegalArgumentException",
+          "status": 400,
+          "detail":"Malformed Request, Reason: Invalid query type, notcoreorran",
+          "instance": null
+        }
+      }
+    },
+    {
+      "name": "CARDQ_400_duplicate_snssai",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "nsi"
+                },
+                {
+                  "name": "ag"
+                }
+              ]
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response" : {
+        "status" : 400,
+        "headers" : {
+          "Content-Type" : "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Malformed Request, IllegalArgumentException",
+          "status": 400,
+          "detail": "Malformed Request, Reason: Duplicate entry found in the inputFields: [snssai]",
+          "instance": null
+        }
+      }
+    },
+    {
+      "name": "CARDQ_400_empty_augmentation_fields",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ],
+              "augmentationFields": []
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response" : {
+        "status" : 400
+      }
+    },
+    {
+      "name": "CARDQ_400_empty_input_fields",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [],
+              "augmentationFields": [
+                {
+                  "name": "nsi"
+                },
+                {
+                  "name": "ag"
+                }
+              ]
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response" : {
+        "status" : 400
+      }
+    },
+    {
+      "name": "CARDQ_400_missing_nodeFDN",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "nsi"
+                },
+                {
+                  "name": "ag"
+                }
+              ]
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response" : {
+        "status" : 400,
+        "headers" : {
+          "Content-Type" : "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Error occurred MandatoryParameterException",
+          "status": 400,
+          "detail": "Missing Mandatory Parameter in inputsFields with format 'name': <value>. The missing parameter(s): [nodeFDN]",
+          "instance": null
+        }
+      }
+    },
+    {
+      "name": "CARDQ_400_missing_input_fields",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "augmentationFields": [
+                {
+                  "name": "nsi"
+                },
+                {
+                  "name": "ag"
+                }
+              ]
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response" : {
+        "status" : 400
+      }
+    },
+    {
+      "name": "CARDQ_400_missing_augmentation_fields",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf[12]$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ]
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response" : {
+        "status" : 400
+      }
+    },
+    {
+      "name": "CARDQ_400_invalid_augmentation_fields",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "notnsi"
+                },
+                {
+                  "name": "notag"
+                }
+              ]
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Malformed Request, IllegalArgumentException",
+          "status": 400,
+          "detail": "Malformed Request, Reason: Invalid augmentationFields value, supported values are: [ag, nsi], but found: [notnsi, notag]",
+          "instance": null
+        }
+      }
+    },
+    {
+      "name": "CARDQ_400_empty_request_body",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": "{}"
+          }
+        ]
+      },
+      "response": {
+        "status": 400
+      }
+    }
+  ]
+}

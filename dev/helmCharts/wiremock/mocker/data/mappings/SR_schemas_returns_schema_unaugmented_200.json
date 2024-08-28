@@ -1,0 +1,17 @@
+{
+  "id": "be6d8596-ca53-11ed-afa1-0242ac120002",
+  "name": "schema_subject_returns_schema_version",
+  "request": {
+    "url": "/schemas/ids/1?fetchMaxId=false&subject=eric-oss-3gpp-pm-xml-core-parser--value",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "schema_reg_subject_version_response_unaugmented.json",
+    "headers": {
+      "Content-Type": "application/vnd.schemaregistry.v1+json",
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Vary": "Accept-Encoding, User-Agent"
+    }
+  }
+}

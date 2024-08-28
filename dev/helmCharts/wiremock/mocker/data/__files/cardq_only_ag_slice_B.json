@@ -1,0 +1,16 @@
+{
+  "fields": [
+    [
+      {
+        "name": "ag",
+        "value": "AggregationEntityNSSI:EC-B"
+      }
+    ],
+    [
+      {
+        "name": "ag",
+        "value": "AggregationEntitySite:EC-Site"
+      }
+    ]
+  ]
+}

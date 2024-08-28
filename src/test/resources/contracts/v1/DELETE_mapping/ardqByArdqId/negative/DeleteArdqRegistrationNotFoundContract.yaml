@@ -1,0 +1,35 @@
+#
+# COPYRIGHT Ericsson 2023
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+description: Not able to delete a ARDQ Registration
+name: given ARDQ Registration id not found
+request:
+  method: DELETE
+  urlPath: /v1/augmentation/registration/ardq/invalidId
+  headers:
+    Content-Type: application/json
+response:
+  status: 404
+  headers:
+    Content-Type: application/json
+  body:
+    type: about:blank
+    title: Not Found
+    status: 404
+    detail: This id 'invalidId' is not found in the current Registration
+    # URI reference identifying the resource.  If present, it may be the HATEOAS link to the resource without schema, host, or port information.
+    # e.g, type: /v1/augmentation/registration/ardq/invalidId
+    instance: null

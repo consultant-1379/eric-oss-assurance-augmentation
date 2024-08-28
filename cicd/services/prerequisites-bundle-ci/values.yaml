@@ -1,0 +1,26 @@
+global:
+  pullSecret: k8s-registry
+  security:
+    tls:
+      enabled: false
+eric-data-document-database-pg:
+  postgresDatabase: aasdb
+  nameOverride: eric-oss-assurance-augmentation-db
+  credentials:
+    kubernetesSecretName: eric-oss-assurance-augmentation-db-secret
+    keyForUserId: pguserid
+    keyForUserPw: pgpasswd
+    keyForSuperPw: super-pwd
+  livenessProbe:
+    failureThreshold: 3
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+  readinessProbe:
+    failureThreshold: 3
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+  startupProbe:
+    failureThreshold: 30
+    periodSeconds: 10

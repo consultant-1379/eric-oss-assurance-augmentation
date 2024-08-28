@@ -1,0 +1,38 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+#  Note : These are the files that are zipped. Please list if any other openapi files need to be zipped.
+#  documents name
+documents:
+  - name: user-guide
+    files:
+      - ../../../../doc/service-user-guide/service_user_guide.md
+      - ../../../../doc/service-user-guide/aas-architecture.png
+      - ../../../../doc/service-user-guide/aas-component-view.png
+  - name: developers-guide
+    files:
+      - ../../../../doc/application-developers-guide/application-developers-guide.md
+      - ../../../../doc/application-developers-guide/app-dev-aas-architecture.png
+      - ../../../../doc/service-user-guide/aas-component-view.png
+  - name: read-me
+    files:
+      - ../../../../README.md
+  - name: contributing
+    files:
+      - ../../../../CONTRIBUTING.md
+  - name: ardq-openapi
+    files:
+      - ../../../../doc/ardq-openapi/eric-oss-core-reporting-dimension-query-openapi.yaml

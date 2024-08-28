@@ -1,0 +1,2406 @@
+{
+	"info": {
+		"_postman_id": "55787cd6-673a-42e9-9a83-dd6b9b100716",
+		"name": "AAS_WiremockTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28470948"
+	},
+	"item": [
+		{
+			"name": "Message Schema",
+			"item": [
+				{
+					"name": "/catalog/v1/message-schema  Create Schema Metadata to Data Catalog (DC)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"dataSpace\": { \"name\": \"5G\" }, \"dataService\": { \"dataServiceName\": \"eric-oss-assurance-augmentation\" }, \"dataCategory\": { \"dataCategoryName\": \"PM_COUNTERS\" }, \"dataProviderType\": { \"providerVersion\": \"Vv101\", \"providerTypeId\": \"vv101\" }, \"messageStatusTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/1\", \"encoding\": \"AVRO\" }, \"messageDataTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"encoding\": \"AVRO\" }, \"dataServiceInstance\": { \"dataServiceInstanceName\": \"eric-oss-assurance-augmentation\", \"controlEndPoint\": \"http://localhost:8082\", \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"dataType\": { \"mediumType\": \"stream\", \"schemaName\": \"cardq_AMF_Mobility_NetworkSlice_1\", \"schemaVersion\": \"1\", \"isExternal\": true, \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"supportedPredicateParameter\": { \"parameterName\": \"pd101\", \"isPassedToConsumedService\": true }, \"messageSchema\": { \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/1\" } }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/catalog/v1/message-schema",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"catalog",
+								"v1",
+								"message-schema"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/catalog/v1/message-schema Create Message Schema",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"dataSpace\": { \"name\": \"5G\" }, \"dataService\": { \"dataServiceName\": \"eric-oss-assurance-augmentation\" }, \"dataCategory\": { \"dataCategoryName\": \"PM_COUNTERS\" }, \"dataProviderType\": { \"providerVersion\": \"Vv101\", \"providerTypeId\": \"vv101\" }, \"messageStatusTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/1\", \"encoding\": \"AVRO\" }, \"messageDataTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"encoding\": \"AVRO\" }, \"dataServiceInstance\": { \"dataServiceInstanceName\": \"eric-oss-assurance-augmentation\", \"controlEndPoint\": \"http://localhost:8082\", \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"dataType\": { \"mediumType\": \"stream\", \"schemaName\": \"cardq_AMF_Mobility_NetworkSlice_1\", \"schemaVersion\": \"1\", \"isExternal\": true, \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"supportedPredicateParameter\": { \"parameterName\": \"pd101\", \"isPassedToConsumedService\": true }, \"messageSchema\": { \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/1\" } }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/catalog/v1/message-schema",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"catalog",
+										"v1",
+										"message-schema"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 117,\n  \"messageDataTopic\": {\n    \"id\": 100,\n    \"name\": \"eric-oss-assurance-augmentation-processing\",\n    \"encoding\": \"AVRO\",\n    \"messageSchemaIds\": [\n      113,\n      114,\n      115,\n      116,\n      111\n    ],\n    \"messageBus\": {\n      \"id\": 96,\n      \"name\": \"msgBusAaug1\",\n      \"clusterName\": \"hall147\",\n      \"nameSpace\": \"data-cat-test\",\n      \"accessEndpoints\": [\n        \"http://eric-data-message-bus-kf:9092/\"\n      ],\n      \"notificationTopicIds\": [],\n      \"messageStatusTopicIds\": [\n        96,\n        97,\n        98,\n        99,\n        100,\n        101\n      ],\n      \"messageDataTopicIds\": [\n        96,\n        97,\n        98,\n        99,\n        100\n      ]\n    },\n    \"dataProviderType\": {\n      \"id\": 97,\n      \"dataSpace\": {\n        \"id\": 98,\n        \"name\": \"5G\",\n        \"dataProviderTypeIds\": [\n          97\n        ]\n      },\n      \"dataCategoryType\": {\n        \"id\": 99,\n        \"dataCategoryName\": \"PM_COUNTERS\"\n      },\n      \"notificationTopicIds\": [],\n      \"messageDataTopicIds\": [\n        96,\n        97,\n        98,\n        99,\n        100\n      ],\n      \"providerVersion\": \"Vv101\",\n      \"providerTypeId\": \"vv101\"\n    },\n    \"messageStatusTopic\": {\n      \"id\": 101,\n      \"name\": \"eric-oss-assurance-augmentation-processing\",\n      \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/1\",\n      \"encoding\": \"AVRO\",\n      \"messageDataTopicIds\": [\n        100\n      ],\n      \"messageBus\": {\n        \"id\": 96,\n        \"name\": \"msgBusAaug1\",\n        \"clusterName\": \"hall147\",\n        \"nameSpace\": \"data-cat-test\",\n        \"accessEndpoints\": [\n          \"http://eric-data-message-bus-kf:9092/\"\n        ],\n        \"notificationTopicIds\": [],\n        \"messageStatusTopicIds\": [\n          96,\n          97,\n          98,\n          99,\n          100,\n          101\n        ],\n        \"messageDataTopicIds\": [\n          96,\n          97,\n          98,\n          99,\n          100\n        ]\n      }\n    }\n  },\n  \"dataService\": {\n    \"id\": 111,\n    \"dataServiceInstance\": [\n      {\n        \"id\": 102,\n        \"dataService\": {\n          \"id\": 111,\n          \"dataServiceName\": \"eric-oss-assurance-augmentation\"\n        },\n        \"dataServiceInstanceName\": \"eric-oss-assurance-augmentation\",\n        \"controlEndPoint\": \"http://localhost:8082\",\n        \"consumedDataSpace\": \"5G\",\n        \"consumedDataCategory\": \"PM_COUNTERS\",\n        \"consumedDataProvider\": \"Core\",\n        \"consumedSchemaVersion\": \"1\",\n        \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\"\n      }\n    ],\n    \"predicateParameter\": [\n      {\n        \"id\": 103,\n        \"parameterName\": \"pd101\",\n        \"isPassedToConsumedService\": true,\n        \"dataService\": {\n          \"id\": 111,\n          \"dataServiceName\": \"eric-oss-assurance-augmentation\"\n        }\n      }\n    ],\n    \"dataServiceName\": \"eric-oss-assurance-augmentation\"\n  },\n  \"dataType\": {\n    \"id\": 114,\n    \"mediumType\": \"stream\",\n    \"mediumId\": 117,\n    \"schemaName\": \"cardq_AMF_Mobility_NetworkSlice_1\",\n    \"schemaVersion\": \"1\",\n    \"consumedDataSpace\": \"5G\",\n    \"consumedDataCategory\": \"PM_COUNTERS\",\n    \"consumedDataProvider\": \"Core\",\n    \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\",\n    \"consumedSchemaVersion\": \"1\",\n    \"external\": true\n  },\n  \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/catalog/v1/message-schema  Update Schema Metadata to Data Catalog (DC)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"id\": 102, \"dataSpace\": { \"name\": \"5G\" }, \"dataService\": { \"dataServiceName\": \"eric-oss-assurance-augmentation\" }, \"dataCategory\": { \"dataCategoryName\": \"PM_COUNTERS\" }, \"dataProviderType\": { \"providerVersion\": \"Vv101\", \"providerTypeId\": \"vv101\" }, \"messageStatusTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\", \"encoding\": \"AVRO\" }, \"messageDataTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"encoding\": \"AVRO\" }, \"dataServiceInstance\": { \"dataServiceInstanceName\": \"eric-oss-assurance-augmentation\", \"controlEndPoint\": \"http://localhost:8082\", \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"dataType\": { \"mediumType\": \"stream\", \"schemaName\": \"cardq_AMF_Mobility_NetworkSlice_1\", \"schemaVersion\": \"2\", \"isExternal\": true, \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"supportedPredicateParameter\": { \"parameterName\": \"pd101\", \"isPassedToConsumedService\": true }, \"messageSchema\": { \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\" } }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/catalog/v1/message-schema",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"catalog",
+								"v1",
+								"message-schema"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/catalog/v1/message-schema Update Message Schema",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"id\": 102, \"dataSpace\": { \"name\": \"5G\" }, \"dataService\": { \"dataServiceName\": \"eric-oss-assurance-augmentation\" }, \"dataCategory\": { \"dataCategoryName\": \"PM_COUNTERS\" }, \"dataProviderType\": { \"providerVersion\": \"Vv101\", \"providerTypeId\": \"vv101\" }, \"messageStatusTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\", \"encoding\": \"AVRO\" }, \"messageDataTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"encoding\": \"AVRO\" }, \"dataServiceInstance\": { \"dataServiceInstanceName\": \"eric-oss-assurance-augmentation\", \"controlEndPoint\": \"http://localhost:8082\", \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"dataType\": { \"mediumType\": \"stream\", \"schemaName\": \"cardq_AMF_Mobility_NetworkSlice_1\", \"schemaVersion\": \"2\", \"isExternal\": true, \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"supportedPredicateParameter\": { \"parameterName\": \"pd101\", \"isPassedToConsumedService\": true }, \"messageSchema\": { \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\" } }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/catalog/v1/message-schema",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"catalog",
+										"v1",
+										"message-schema"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 117,\n  \"messageDataTopic\": {\n    \"id\": 100,\n    \"name\": \"eric-oss-assurance-augmentation-processing\",\n    \"encoding\": \"AVRO\",\n    \"messageSchemaIds\": [\n      113,\n      114,\n      115,\n      116,\n      117,\n      111\n    ],\n    \"messageBus\": {\n      \"id\": 96,\n      \"name\": \"msgBusAaug1\",\n      \"clusterName\": \"hall147\",\n      \"nameSpace\": \"data-cat-test\",\n      \"accessEndpoints\": [\n        \"http://eric-data-message-bus-kf:9092/\"\n      ],\n      \"notificationTopicIds\": [],\n      \"messageStatusTopicIds\": [\n        96,\n        97,\n        98,\n        99,\n        100,\n        101\n      ],\n      \"messageDataTopicIds\": [\n        96,\n        97,\n        98,\n        99,\n        100\n      ]\n    },\n    \"dataProviderType\": {\n      \"id\": 97,\n      \"dataSpace\": {\n        \"id\": 98,\n        \"name\": \"5G\",\n        \"dataProviderTypeIds\": [\n          97\n        ]\n      },\n      \"dataCategoryType\": {\n        \"id\": 99,\n        \"dataCategoryName\": \"PM_COUNTERS\"\n      },\n      \"notificationTopicIds\": [],\n      \"messageDataTopicIds\": [\n        96,\n        97,\n        98,\n        99,\n        100\n      ],\n      \"providerVersion\": \"Vv101\",\n      \"providerTypeId\": \"vv101\"\n    },\n    \"messageStatusTopic\": {\n      \"id\": 101,\n      \"name\": \"eric-oss-assurance-augmentation-processing\",\n      \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\",\n      \"encoding\": \"AVRO\",\n      \"messageDataTopicIds\": [\n        100\n      ],\n      \"messageBus\": {\n        \"id\": 96,\n        \"name\": \"msgBusAaug1\",\n        \"clusterName\": \"hall147\",\n        \"nameSpace\": \"data-cat-test\",\n        \"accessEndpoints\": [\n          \"http://eric-data-message-bus-kf:9092/\"\n        ],\n        \"notificationTopicIds\": [],\n        \"messageStatusTopicIds\": [\n          96,\n          97,\n          98,\n          99,\n          100,\n          101\n        ],\n        \"messageDataTopicIds\": [\n          96,\n          97,\n          98,\n          99,\n          100\n        ]\n      }\n    }\n  },\n  \"dataService\": {\n    \"id\": 111,\n    \"dataServiceInstance\": [\n      {\n        \"id\": 102,\n        \"dataService\": {\n          \"id\": 111,\n          \"dataServiceName\": \"eric-oss-assurance-augmentation\"\n        },\n        \"dataServiceInstanceName\": \"eric-oss-assurance-augmentation\",\n        \"controlEndPoint\": \"http://localhost:8082\",\n        \"consumedDataSpace\": \"5G\",\n        \"consumedDataCategory\": \"PM_COUNTERS\",\n        \"consumedDataProvider\": \"Core\",\n        \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\",\n        \"consumedSchemaVersion\": \"1\"\n      }\n    ],\n    \"predicateParameter\": [\n      {\n        \"id\": 103,\n        \"parameterName\": \"pd101\",\n        \"isPassedToConsumedService\": true,\n        \"dataService\": {\n          \"id\": 111,\n          \"dataServiceName\": \"eric-oss-assurance-augmentation\"\n        }\n      }\n    ],\n    \"dataServiceName\": \"eric-oss-assurance-augmentation\"\n  },\n  \"dataType\": {\n    \"id\": 114,\n    \"mediumId\": 117,\n    \"mediumType\": \"stream\",\n    \"schemaName\": \"cardq_AMF_Mobility_NetworkSlice_1\",\n    \"schemaVersion\": \"2\",\n    \"consumedDataSpace\": \"5G\",\n    \"consumedDataCategory\": \"PM_COUNTERS\",\n    \"consumedDataProvider\": \"Core\",\n    \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\",\n    \"consumedSchemaVersion\": \"1\",\n    \"external\": true\n  },\n  \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/catalog/v1/message-schema 400 Bad Request Error Response",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"Invalid Request Value\": \"400\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/catalog/v1/message-schema",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"catalog",
+								"v1",
+								"message-schema"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/catalog/v1/message-schema get input schema's metadata from the Data Catalog (DC)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"dataSpace\": {}, \"dataService\": {\"dataServiceName\": \"dataservicename102\"}, \"dataCategory\": {\"dataCategoryName\": \"CM_EXPORTS1\"}, \"dataProviderType\": {\"providerVersion\": \"Vv101\", \"providerTypeId\": \"vv101\"}, \"messageStatusTopic\": {\"name\": \"topic102\", \"messageBusId\": 1, \"specificationReference\": \"SpecRef101\", \"encoding\": \"JSON\"}, \"messageDataTopic\": {\"name\": \"topic102\", \"messageBusId\": 1, \"encoding\": \"JSON\"}, \"dataServiceInstance\": {\"dataServiceInstanceName\": \"dsinst101\", \"controlEndPoint\": \"http://localhost:8082\", \"consumedDataSpace\": \"4G\", \"consumedDataCategory\": \"4G\", \"consumedDataProvider\": \"4G\", \"consumedSchemaName\": \"SCH2\", \"consumedSchemaVersion\": \"2\"}, \"dataType\": {\"mediumType\": \"stream\", \"schemaName\": \"SCH2\", \"schemaVersion\": \"2\", \"isExternal\": true, \"consumedDataSpace\": \"4G\", \"consumedDataCategory\":\"4G\", \"consumedDataProvider\": \"4G\", \"consumedSchemaName\": \"4G\", \"consumedSchemaVersion\": \"2\"}, \"supportedPredicateParameter\": {\"parameterName\": \"pd101\", \"isPassedToConsumedService\": true}, \"messageSchema\": {\"specificationReference\": \"SpecRef101\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/catalog/v1/message-schema",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"catalog",
+										"v1",
+										"message-schema"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"\\\"response\\\":{\\\"status\\\":400,\\\"headers\\\":{\\\"Date\\\":\\\"{{nowtimezone='GMT'format='EEE,ddMMMyyyyHH:mm:ssz'}}\\\",\\\"Content-Type\\\":\\\"application/json\\\"},\\\"jsonBody\\\":{\\\"path\\\":\\\"/catalog/v1/message-schema\\\",\\\"timeStamp\\\":\\\"2022-06-17T05:17:26.383209\\\",\\\"message\\\":\\\"Invalid request values - name is mandatory field in dataSpace\\\"}}\""
+						}
+					]
+				},
+				{
+					"name": "/catalog/v1/message-schema  Write for Schema Information to Data Catalog (DC) 409 Error Response",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"Conflict\": \"409\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/catalog/v1/message-schema",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"catalog",
+								"v1",
+								"message-schema"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/catalog/v1/message-schema get input schema's metadata from the Data Catalog (DC)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"Conflict\": \"409\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/catalog/v1/message-schema",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"catalog",
+										"v1",
+										"message-schema"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"\\\"response\\\":{\\\"status\\\":409,\\\"headers\\\":{\\\"Date\\\":\\\"{{nowtimezone='GMT'format='EEE,ddMMMyyyyHH:mm:ssz'}}\\\",\\\"Content-Type\\\":\\\"application/json\\\"},\\\"jsonBody\\\":{\\\"path\\\":\\\"/catalog/v1/message-schema\\\",\\\"timeStamp\\\":\\\"2022-06-17T05:16:45.069191\\\",\\\"message\\\":\\\"Resourceexistsalready\\\"}}\""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Data Catalog",
+			"item": [
+				{
+					"name": "/catalog/v1/data-type get input schema's metadata from the Data Catalog (DC)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{surl}}/catalog/v1/data-type?dataSpace=5G&dataCategory=PM_COUNTERS&schemaName=AMF_Mobility_NetworkSlice_1",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"catalog",
+								"v1",
+								"data-type"
+							],
+							"query": [
+								{
+									"key": "dataSpace",
+									"value": "5G"
+								},
+								{
+									"key": "dataCategory",
+									"value": "PM_COUNTERS"
+								},
+								{
+									"key": "schemaName",
+									"value": "AMF_Mobility_NetworkSlice_1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/catalog/v1/data-type get input schema's metadata from the Data Catalog (DC)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{surl}}/catalog/v1/data-type?dataSpace=5G&dataCategory=PM_COUNTER&schemaName=AMF_Mobility_NetworkSlice_1",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"catalog",
+										"v1",
+										"data-type"
+									],
+									"query": [
+										{
+											"key": "dataSpace",
+											"value": "5G"
+										},
+										{
+											"key": "dataCategory",
+											"value": "PM_COUNTER"
+										},
+										{
+											"key": "schemaName",
+											"value": "AMF_Mobility_NetworkSlice_1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 1,\n    \"mediumType\": \"stream\",\n    \"mediumId\": 1,\n    \"schemaName\": \"AMF_Mobility_NetworkSlice_1\",\n    \"schemaVersion\": \"1\",\n    \"isExternal\": true,\n    \"consumedDataSpace\": \"5G\",\n    \"consumedDataCategory\": \"PM_COUNTERS\",\n    \"consumedDataProvider\": \"Core\",\n    \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\",\n    \"consumedSchemaVersion\": \"1\",\n    \"messageSchema\": {\n      \"id\": 1,\n      \"messageDataTopic\": {\n        \"id\": 1,\n        \"name\": \"eric-oss-3gpp-pm-xml-core-parser-\",\n        \"encoding\": \"AVRO\",\n        \"messageSchemaIds\": [\n          1,\n          2,\n          3,\n          4,\n          5\n        ],\n        \"messageBus\": {\n          \"id\": 1,\n          \"name\": \"messagebus1\",\n          \"clusterName\": \"clusterName\",\n          \"nameSpace\": \"adc-deploy\",\n          \"accessEndpoints\": [\n            \"localhost:29092\"\n          ],\n          \"notificationTopicIds\": [],\n          \"messageStatusTopicIds\": [\n            1\n          ],\n          \"messageDataTopicIds\": [\n            1\n          ]\n        },\n        \"dataProviderType\": {\n          \"id\": 6,\n          \"dataSpace\": {\n            \"id\": 6,\n            \"name\": \"5G\",\n            \"dataProviderTypeIds\": [\n              6\n            ]\n          },\n          \"dataCategoryType\": {\n            \"id\": 6,\n            \"dataCategoryName\": \"PM_COUNTERS\"\n          },\n          \"notificationTopicIds\": [],\n          \"messageDataTopicIds\": [\n            1\n          ],\n          \"providerVersion\": \"Vv101\",\n          \"providerTypeId\": \"vv101\"\n        },\n        \"messageStatusTopic\": {\n          \"id\": 1,\n          \"name\": \"eric-oss-3gpp-pm-xml-core-parser-\",\n          \"specificationReference\": \"5G.Core.PM_COUNTERS.up_payload_dnn_slice_1/1\",\n          \"encoding\": \"AVRO\",\n          \"messageDataTopicIds\": [\n            1\n          ],\n          \"messageBus\": {\n            \"id\": 1,\n            \"name\": \"messagebus1\",\n            \"clusterName\": \"clusterName\",\n            \"nameSpace\": \"adc-deploy\",\n            \"accessEndpoints\": [\n              \"localhost:29092\"\n            ],\n            \"notificationTopicIds\": [],\n            \"messageStatusTopicIds\": [\n              1\n            ],\n            \"messageDataTopicIds\": [\n              1\n            ]\n          }\n        }\n      },\n      \"dataService\": {\n        \"id\": 6,\n        \"dataServiceName\": \"eric-oss-3gpp-pm-xml-core-parser\"\n      },\n      \"dataType\": {\n        \"id\": 1,\n        \"mediumType\": \"stream\",\n        \"mediumId\": 1,\n        \"schemaName\": \"AMF_Mobility_NetworkSlice_1\",\n        \"schemaVersion\": \"1\",\n        \"isExternal\": true,\n        \"consumedDataSpace\": \"5G\",\n        \"consumedDataCategory\": \"PM_COUNTERS\",\n        \"consumedDataProvider\": \"Core\",\n        \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\",\n        \"consumedSchemaVersion\": \"1\"\n      },\n      \"specificationReference\": \"5G.Core.PM_COUNTERS.AMF_Mobility_NetworkSlice_1/1\"\n    }\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "/catalog/v1/data-type get input schema's metadata from the Data Catalog (DC) 400 Error Response",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{surl}}/catalog/v1/data-type?invalidQueryParameters=invalid",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"catalog",
+								"v1",
+								"data-type"
+							],
+							"query": [
+								{
+									"key": "invalidQueryParameters",
+									"value": "invalid"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/catalog/v1/data-type get input schema's metadata from the Data Catalog (DC)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{surl}}/catalog/v1/data-type?invalidQueryParameters=invalid",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"catalog",
+										"v1",
+										"data-type"
+									],
+									"query": [
+										{
+											"key": "invalidQueryParameters",
+											"value": "invalid"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"\\\"response\\\":{\\\"status\\\":400,\\\"headers\\\":{\\\"Date\\\":\\\"{{nowtimezone='GMT'format='EEE,ddMMMyyyyHH:mm:ssz'}}\\\",\\\"Content-Type\\\":\\\"application/json\\\"},\\\"jsonBody\\\":{\\\"path\\\":\\\"/catalog/v1/data-type\\\",\\\"timeStamp\\\":\\\"2023-03-15T20:39:33.797Z\\\",\\\"message\\\":\\\"Invalid Query Params - Allowed QueryParams(dataSpace, dataCategory, dataProvider, schemaName, schemaVersion, serviceName, isExternal)\\\"}}\""
+						}
+					]
+				},
+				{
+					"name": "/catalog/v1/data-type-resource-not-found get input schema's metadata from the Data Catalog (DC) 404 Error Response",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{surl}}/catalog/v1/data-type?dataSpace=NonExist&dataCategory=NonExist&schemaName=NonExist",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"catalog",
+								"v1",
+								"data-type"
+							],
+							"query": [
+								{
+									"key": "dataSpace",
+									"value": "NonExist"
+								},
+								{
+									"key": "dataCategory",
+									"value": "NonExist"
+								},
+								{
+									"key": "schemaName",
+									"value": "NonExist"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/catalog/v1/data-type get input schema's metadata from the Data Catalog (DC)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{surl}}/catalog/v1/data-type?dataSpace=NonExist&dataCategory=NonExist&schemaName=NonExist",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"catalog",
+										"v1",
+										"data-type"
+									],
+									"query": [
+										{
+											"key": "dataSpace",
+											"value": "NonExist"
+										},
+										{
+											"key": "dataCategory",
+											"value": "NonExist"
+										},
+										{
+											"key": "schemaName",
+											"value": "NonExist"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"\\\"response\\\":{\\\"status\\\":404,\\\"headers\\\":{\\\"Date\\\":\\\"{{nowtimezone='GMT'format='EEE,ddMMMyyyyHH:mm:ssz'}}\\\",\\\"Content-Type\\\":\\\"application/json\\\"},\\\"jsonBody\\\":{\\\"path\\\":\\\"/catalog/v1/data-type\\\",\\\"timeStamp\\\":\\\"2023-03-15T20:39:33.797Z\\\",\\\"message\\\":\\\"Requested Resource not found\\\"}}}\""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Schema Registry",
+			"item": [
+				{
+					"name": "/subjects/{subject}/versions/latest Get latest schema by name (Un-augmented)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.AMF_Mobility_NetworkSlice_1/versions/latest",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"subjects",
+								"5G.Core.PM_COUNTERS.AMF_Mobility_NetworkSlice_1",
+								"versions",
+								"latest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/subjects/{subject}/versions/latest Get latest schema by name (Un-augmented)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": "{\"subject\":\"5G.Core.PM_COUNTERS.AMF_Mobility_NetworkSlice_1\",\"version\":1,\"id\":1,\"schema\":{\"type\":\"record\",\"name\":\"AMF_Mobility_NetworkSlice_1\",\"namespace\":\"5G.Core.PM_COUNTERS\",\"fields\":[{\"name\":\"dnPrefix\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"DN prefix for the sending network node\"},{\"name\":\"nodeFDN\",\"type\":\"string\",\"doc\":\"Local DN of the sending network node\"},{\"name\":\"elementType\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Type of sending network node (e.g. PCC or PCG)\"},{\"name\":\"moFdn\",\"type\":\"string\",\"doc\":\"DN of the resource being measured\"},{\"name\":\"snssai\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Unique identifier of the 5G network slice\"},{\"name\":\"snssai_sst\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Service/Slice Type\"},{\"name\":\"snssai_sd\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Slice Differentiator\"},{\"name\":\"ropBeginTime\",\"type\":\"string\",\"doc\":\"Collection begin timestamp in UTC format\"},{\"name\":\"ropEndTime\",\"type\":\"string\",\"doc\":\"Collection end timestamp in UTC format\"},{\"name\":\"suspect\",\"type\":[\"null\",\"boolean\"],\"default\":null,\"doc\":\"Reliability flag for collected data. Default is false (reliable data).\"},{\"name\":\"apn\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Apn field\"},{\"name\":\"pmCounters\",\"type\":[\"null\",{\"name\":\"pmMetricsSchema\",\"type\":\"record\",\"fields\":[{\"name\":\"VS_NS_NbrRegisteredSub_5GS\",\"type\":[\"null\",\"int\"],\"default\":null,\"doc\":\"Number of AMF subscribers\"}]}],\"default\":null}]}}"
+						}
+					]
+				},
+				{
+					"name": "/subjects/{subject}/versions/latest Invalid subject returns 404 error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.Invalid_Schema_Name/versions/latest",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"subjects",
+								"5G.Core.PM_COUNTERS.Invalid_Schema_Name",
+								"versions",
+								"latest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/subjects/{subject}/versions/latest Invalid subject returns 404 error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"response\":{\"status\":404,\"headers\":{\"Date\":\"{{nowtimezone='GMT'format='EEE,ddMMMyyyyHH:mm:ssz'}}\",\"Content-Type\":\"application/json\"},\"jsonBody\":{\"error_code\":404,\"message\":\"Error code 40401 – Subject not found\"}}"
+						}
+					]
+				},
+				{
+					"name": "/subjects/{subject} Invalid subject returns 404 error",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"AMF_Mobility_NetworkSlice_1\\\",\\\"namespace\\\":\\\"5G.Core.PM_COUNTERS\\\",\\\"fields\\\":[{\\\"name\\\":\\\"dnPrefix\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"DN prefix for the sending network node\\\"},{\\\"name\\\":\\\"nodeFDN\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Local DN of the sending network node\\\"},{\\\"name\\\":\\\"elementType\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Type of sending network node (e.g. PCC or PCG)\\\"},{\\\"name\\\":\\\"moFdn\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"DN of the resource being measured\\\"},{\\\"name\\\":\\\"snssai\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Unique identifier of the 5G network slice\\\"},{\\\"name\\\":\\\"snssai_sst\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Service/Slice Type\\\"},{\\\"name\\\":\\\"snssai_sd\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Slice Differentiator\\\"},{\\\"name\\\":\\\"ropBeginTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection begin timestamp in UTC format\\\"},{\\\"name\\\":\\\"ropEndTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection end timestamp in UTC format\\\"},{\\\"name\\\":\\\"suspect\\\",\\\"type\\\":[\\\"null\\\",\\\"boolean\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Reliability flag for collected data. Default is false (reliable data).\\\"},{\\\"name\\\":\\\"apn\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Apn field\\\"},{\\\"name\\\":\\\"pmCounters\\\",\\\"type\\\":[\\\"null\\\",{\\\"name\\\":\\\"pmMetricsSchema\\\",\\\"type\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"VS_NS_NbrRegisteredSub_5GS\\\",\\\"type\\\":[\\\"null\\\",\\\"int\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Number of AMF subscribers\\\"}]}],\\\"default\\\":null}]}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.Invalid_Schema_Name?normalize=false&deleted=true",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"subjects",
+								"5G.Core.PM_COUNTERS.Invalid_Schema_Name"
+							],
+							"query": [
+								{
+									"key": "normalize",
+									"value": "false"
+								},
+								{
+									"key": "deleted",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/subjects/{subject} Invalid subject returns 404 error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"AMF_Mobility_NetworkSlice_1\\\",\\\"namespace\\\":\\\"5G.Core.PM_COUNTERS\\\",\\\"fields\\\":[{\\\"name\\\":\\\"dnPrefix\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"DN prefix for the sending network node\\\"},{\\\"name\\\":\\\"nodeFDN\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Local DN of the sending network node\\\"},{\\\"name\\\":\\\"elementType\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Type of sending network node (e.g. PCC or PCG)\\\"},{\\\"name\\\":\\\"moFdn\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"DN of the resource being measured\\\"},{\\\"name\\\":\\\"snssai\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Unique identifier of the 5G network slice\\\"},{\\\"name\\\":\\\"snssai_sst\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Service/Slice Type\\\"},{\\\"name\\\":\\\"snssai_sd\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Slice Differentiator\\\"},{\\\"name\\\":\\\"ropBeginTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection begin timestamp in UTC format\\\"},{\\\"name\\\":\\\"ropEndTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection end timestamp in UTC format\\\"},{\\\"name\\\":\\\"suspect\\\",\\\"type\\\":[\\\"null\\\",\\\"boolean\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Reliability flag for collected data. Default is false (reliable data).\\\"},{\\\"name\\\":\\\"apn\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Apn field\\\"},{\\\"name\\\":\\\"pmCounters\\\",\\\"type\\\":[\\\"null\\\",{\\\"name\\\":\\\"pmMetricsSchema\\\",\\\"type\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"VS_NS_NbrRegisteredSub_5GS\\\",\\\"type\\\":[\\\"null\\\",\\\"int\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Number of AMF subscribers\\\"}]}],\\\"default\\\":null}]}\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.Invalid_Schema_Name?normalize=false&deleted=true",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"subjects",
+										"5G.Core.PM_COUNTERS.Invalid_Schema_Name"
+									],
+									"query": [
+										{
+											"key": "normalize",
+											"value": "false"
+										},
+										{
+											"key": "deleted",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.schemaregistry.v1+json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "Content-Length",
+									"value": "8"
+								}
+							],
+							"cookie": [],
+							"body": "\"response\":{\"status\":404,\"headers\":{\"Date\":\"{{nowtimezone='GMT'format='EEE,ddMMMyyyyHH:mm:ssz'}}\",\"Content-Type\":\"application/json\"},\"jsonBody\":{\"error_code\":404,\"message\":\"Error code 40401 – Subject not found\"}}"
+						}
+					]
+				},
+				{
+					"name": "/subjects/{subject} Get schema version with normalize and deleted flags (Augmented)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"cardq_AMF_Mobility_NetworkSlice_1\\\",\\\"namespace\\\":\\\"5G.Core.PM_COUNTERS\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nsi\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"The nsi value\\\"},{\\\"name\\\":\\\"dnPrefix\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"DN prefix for the sending network node\\\"},{\\\"name\\\":\\\"nodeFDN\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Local DN of the sending network node\\\"},{\\\"name\\\":\\\"elementType\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Type of sending network node (e.g. PCC or PCG)\\\"},{\\\"name\\\":\\\"moFdn\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"DN of the resource being measured\\\"},{\\\"name\\\":\\\"snssai\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Unique identifier of the 5G network slice\\\"},{\\\"name\\\":\\\"snssai_sst\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Service/Slice Type\\\"},{\\\"name\\\":\\\"snssai_sd\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Slice Differentiator\\\"},{\\\"name\\\":\\\"ropBeginTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection begin timestamp in UTC format\\\"},{\\\"name\\\":\\\"ropEndTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection end timestamp in UTC format\\\"},{\\\"name\\\":\\\"suspect\\\",\\\"type\\\":[\\\"null\\\",\\\"boolean\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Reliability flag for collected data. Default is false (reliable data).\\\"},{\\\"name\\\":\\\"apn\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Apn field\\\"},{\\\"name\\\":\\\"pmCounters\\\",\\\"type\\\":[\\\"null\\\",{\\\"name\\\":\\\"pmMetricsSchema\\\",\\\"type\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"VS_NS_NbrRegisteredSub_5GS\\\",\\\"type\\\":[\\\"null\\\",\\\"int\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Number of AMF subscribers\\\"}]}],\\\"default\\\":null}]}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1?normalize=false&deleted=true",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"subjects",
+								"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1"
+							],
+							"query": [
+								{
+									"key": "normalize",
+									"value": "false"
+								},
+								{
+									"key": "deleted",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/subjects/{subject} Get schema version with normalize and deleted flags (Augmented)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"cardq_AMF_Mobility_NetworkSlice_1\\\",\\\"namespace\\\":\\\"5G.Core.PM_COUNTERS\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nsi\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"The nsi value\\\"},{\\\"name\\\":\\\"dnPrefix\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"DN prefix for the sending network node\\\"},{\\\"name\\\":\\\"nodeFDN\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Local DN of the sending network node\\\"},{\\\"name\\\":\\\"elementType\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Type of sending network node (e.g. PCC or PCG)\\\"},{\\\"name\\\":\\\"moFdn\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"DN of the resource being measured\\\"},{\\\"name\\\":\\\"snssai\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Unique identifier of the 5G network slice\\\"},{\\\"name\\\":\\\"snssai_sst\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Service/Slice Type\\\"},{\\\"name\\\":\\\"snssai_sd\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Slice Differentiator\\\"},{\\\"name\\\":\\\"ropBeginTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection begin timestamp in UTC format\\\"},{\\\"name\\\":\\\"ropEndTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection end timestamp in UTC format\\\"},{\\\"name\\\":\\\"suspect\\\",\\\"type\\\":[\\\"null\\\",\\\"boolean\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Reliability flag for collected data. Default is false (reliable data).\\\"},{\\\"name\\\":\\\"apn\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Apn field\\\"},{\\\"name\\\":\\\"pmCounters\\\",\\\"type\\\":[\\\"null\\\",{\\\"name\\\":\\\"pmMetricsSchema\\\",\\\"type\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"VS_NS_NbrRegisteredSub_5GS\\\",\\\"type\\\":[\\\"null\\\",\\\"int\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Number of AMF subscribers\\\"}]}],\\\"default\\\":null}]}\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1?normalize=false&deleted=true",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"subjects",
+										"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1"
+									],
+									"query": [
+										{
+											"key": "normalize",
+											"value": "false"
+										},
+										{
+											"key": "deleted",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.schemaregistry.v1+json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "Content-Length",
+									"value": "8"
+								}
+							],
+							"cookie": [],
+							"body": "{\"subject\":\"5G.Core.PM_COUNTERS.AMF_Mobility_NetworkSlice_1\",\"version\":1,\"id\":1,\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"cardq_AMF_Mobility_NetworkSlice_1\\\",\\\"namespace\\\":\\\"5G.Core.PM_COUNTERS\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nsi\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"The nsi value\\\"},{\\\"name\\\":\\\"dnPrefix\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"DN prefix for the sending network node\\\"},{\\\"name\\\":\\\"nodeFDN\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Local DN of the sending network node\\\"},{\\\"name\\\":\\\"elementType\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Type of sending network node (e.g. PCC or PCG)\\\"},{\\\"name\\\":\\\"moFdn\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"DN of the resource being measured\\\"},{\\\"name\\\":\\\"snssai\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Unique identifier of the 5G network slice\\\"},{\\\"name\\\":\\\"snssai_sst\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Service/Slice Type\\\"},{\\\"name\\\":\\\"snssai_sd\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Slice Differentiator\\\"},{\\\"name\\\":\\\"ropBeginTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection begin timestamp in UTC format\\\"},{\\\"name\\\":\\\"ropEndTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection end timestamp in UTC format\\\"},{\\\"name\\\":\\\"suspect\\\",\\\"type\\\":[\\\"null\\\",\\\"boolean\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Reliability flag for collected data. Default is false (reliable data).\\\"},{\\\"name\\\":\\\"apn\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Apn field\\\"},{\\\"name\\\":\\\"pmCounters\\\",\\\"type\\\":[\\\"null\\\",{\\\"name\\\":\\\"pmMetricsSchema\\\",\\\"type\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"VS_NS_NbrRegisteredSub_5GS\\\",\\\"type\\\":[\\\"null\\\",\\\"int\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Number of AMF subscribers\\\"}]}],\\\"default\\\":null}]}\"}"
+						}
+					]
+				},
+				{
+					"name": "/subjects/{subject}/versions Create schema with normalize flag (Augmented)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"cardq_AMF_Mobility_NetworkSlice_1\\\",\\\"namespace\\\":\\\"5G.Core.PM_COUNTERS\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nsi\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"The nsi value\\\"},{\\\"name\\\":\\\"dnPrefix\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"DN prefix for the sending network node\\\"},{\\\"name\\\":\\\"nodeFDN\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Local DN of the sending network node\\\"},{\\\"name\\\":\\\"elementType\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Type of sending network node (e.g. PCC or PCG)\\\"},{\\\"name\\\":\\\"moFdn\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"DN of the resource being measured\\\"},{\\\"name\\\":\\\"snssai\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Unique identifier of the 5G network slice\\\"},{\\\"name\\\":\\\"snssai_sst\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Service/Slice Type\\\"},{\\\"name\\\":\\\"snssai_sd\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Slice Differentiator\\\"},{\\\"name\\\":\\\"ropBeginTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection begin timestamp in UTC format\\\"},{\\\"name\\\":\\\"ropEndTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection end timestamp in UTC format\\\"},{\\\"name\\\":\\\"suspect\\\",\\\"type\\\":[\\\"null\\\",\\\"boolean\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Reliability flag for collected data. Default is false (reliable data).\\\"},{\\\"name\\\":\\\"apn\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Apn field\\\"},{\\\"name\\\":\\\"pmCounters\\\",\\\"type\\\":[\\\"null\\\",{\\\"name\\\":\\\"pmMetricsSchema\\\",\\\"type\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"VS_NS_NbrRegisteredSub_5GS\\\",\\\"type\\\":[\\\"null\\\",\\\"int\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Number of AMF subscribers\\\"}]}],\\\"default\\\":null}]}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/versions?normalize=false",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"subjects",
+								"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1",
+								"versions"
+							],
+							"query": [
+								{
+									"key": "normalize",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/subjects/{subject}/versions Create schema with normalize flag (Augmented)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"cardq_AMF_Mobility_NetworkSlice_1\\\",\\\"namespace\\\":\\\"5G.Core.PM_COUNTERS\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nsi\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"The nsi value\\\"},{\\\"name\\\":\\\"dnPrefix\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"DN prefix for the sending network node\\\"},{\\\"name\\\":\\\"nodeFDN\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Local DN of the sending network node\\\"},{\\\"name\\\":\\\"elementType\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Type of sending network node (e.g. PCC or PCG)\\\"},{\\\"name\\\":\\\"moFdn\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"DN of the resource being measured\\\"},{\\\"name\\\":\\\"snssai\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Unique identifier of the 5G network slice\\\"},{\\\"name\\\":\\\"snssai_sst\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Service/Slice Type\\\"},{\\\"name\\\":\\\"snssai_sd\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Slice Differentiator\\\"},{\\\"name\\\":\\\"ropBeginTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection begin timestamp in UTC format\\\"},{\\\"name\\\":\\\"ropEndTime\\\",\\\"type\\\":\\\"string\\\",\\\"doc\\\":\\\"Collection end timestamp in UTC format\\\"},{\\\"name\\\":\\\"suspect\\\",\\\"type\\\":[\\\"null\\\",\\\"boolean\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Reliability flag for collected data. Default is false (reliable data).\\\"},{\\\"name\\\":\\\"apn\\\",\\\"type\\\":[\\\"null\\\",\\\"string\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Apn field\\\"},{\\\"name\\\":\\\"pmCounters\\\",\\\"type\\\":[\\\"null\\\",{\\\"name\\\":\\\"pmMetricsSchema\\\",\\\"type\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"VS_NS_NbrRegisteredSub_5GS\\\",\\\"type\\\":[\\\"null\\\",\\\"int\\\"],\\\"default\\\":null,\\\"doc\\\":\\\"Number of AMF subscribers\\\"}]}],\\\"default\\\":null}]}\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/versions?normalize=false",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"subjects",
+										"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1",
+										"versions"
+									],
+									"query": [
+										{
+											"key": "normalize",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.schemaregistry.v1+json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "Content-Length",
+									"value": "8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "/subjects/{subject}/versions Invalid request body returns 422",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"Invalid Schema\": \"422\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/versions?normalize=false&deleted=true",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"subjects",
+								"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1",
+								"versions"
+							],
+							"query": [
+								{
+									"key": "normalize",
+									"value": "false"
+								},
+								{
+									"key": "deleted",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/subjects/{subject}/versions Invalid request body returns 422",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"Invalid Schema\": \"422\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/subjects/5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/versions?normalize=false&deleted=true",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"subjects",
+										"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1",
+										"versions"
+									],
+									"query": [
+										{
+											"key": "normalize",
+											"value": "false"
+										},
+										{
+											"key": "deleted",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 14:40:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"response\":{\"status\":422,\"headers\":{\"Date\":\"{{nowtimezone='GMT'format='EEE,ddMMMyyyyHH:mm:ssz'}}\",\"Content-Type\":\"application/json\"},\"jsonBody\":{\"error_code\":422,\"message\":\"Error code 42201 – Invalid schema\"}}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Ardq Service",
+			"item": [
+				{
+					"name": "200_responses",
+					"item": [
+						{
+							"name": "Both NSI and AG",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "no snssai AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"fields\": [\n        [\n            {\n                \"name\": \"nsi\",\n                \"value\": \"ManualDataSet-NetworkSlice-A\"\n            },\n            {\n                \"name\": \"ag\",\n                \"value\": \"AggregationEntityNSSI:EC-A\"\n            }\n        ],\n        [\n            {\n                \"name\": \"nsi\",\n                \"value\": \"ManualDataSet-NetworkSlice-B\"\n            },\n            {\n                \"name\": \"ag\",\n                \"value\": \"AggregationEntitySite:EC-Site\"\n            }\n        ],\n        [\n            {\n                \"name\": \"nsi\",\n                \"value\": \"ManualDataSet-NetworkSlice-B\"\n            },\n            {\n                \"name\": \"ag\",\n                \"value\": \"AggregationEntityNSSI:EC-B\"\n            }\n        ]\n    ]\n}"
+								},
+								{
+									"name": "empty snssai AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"fields\": [\n        [\n            {\n                \"name\": \"nsi\",\n                \"value\": \"ManualDataSet-NetworkSlice-A\"\n            },\n            {\n                \"name\": \"ag\",\n                \"value\": \"AggregationEntityNSSI:EC-A\"\n            }\n        ],\n        [\n            {\n                \"name\": \"nsi\",\n                \"value\": \"ManualDataSet-NetworkSlice-B\"\n            },\n            {\n                \"name\": \"ag\",\n                \"value\": \"AggregationEntitySite:EC-Site\"\n            }\n        ],\n        [\n            {\n                \"name\": \"nsi\",\n                \"value\": \"ManualDataSet-NetworkSlice-B\"\n            },\n            {\n                \"name\": \"ag\",\n                \"value\": \"AggregationEntityNSSI:EC-B\"\n            }\n        ]\n    ]\n}"
+								},
+								{
+									"name": "snssai 1 to 3 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"1-1\" // \"2-1\", \"3-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-A\"\n      },\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-A\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 4 to 9 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"4-1\" // \"5-1\", \"6-1\", ... \"9-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-A\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 10 to 12 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-B\"\n      },\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntitySite:EC-Site\"\n      }\n    ],\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-B\"\n      },\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-B\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 13 to 19 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"13-1\" // \"14-1\", \"15-1\", ..., \"19-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-B\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntitySite:EC-Site\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 20 to 29 AMF1 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"20-1\" // \"21-1\", \"22-1\", ..., \"29-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": []\n}"
+								},
+								{
+									"name": "snssai 20 to 29 AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"20-1\" // \"21-1\", \"22-1\", ..., \"29-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-B\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntitySite:EC-Site\"\n      }\n    ]\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "only AG",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "no snssai AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-A\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntitySite:EC-Site\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-B\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "empty snssai AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-A\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntitySite:EC-Site\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-B\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 1 to 9 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"1-1\" // \"2-1\", \"3-1\", ..., \"9-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-A\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 10 to 19 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"10-1\" // \"11-1\", \"12-1\", ..., \"19-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-B\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntitySite:EC-Site\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 20 to 29 AMF1 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"20-1\" // \"21-1\", \"22-1\", ..., \"29-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": []\n}"
+								},
+								{
+									"name": "snssai 20 to 29 AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"20-1\" // \"21-1\", \"22-1\", ..., \"29-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"ag\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntityNSSI:EC-B\"\n      }\n    ],\n    [\n      {\n        \"name\": \"ag\",\n        \"value\": \"AggregationEntitySite:EC-Site\"\n      }\n    ]\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "only NSI",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        },\n        {\n            \"name\": \"ag\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "no snssai AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-A\"\n      }\n    ],\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-B\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "empty snssai AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-A\"\n      }\n    ],\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-B\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 1 to 3 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"1-1\" // \"2-1\", \"3-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-A\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 4 to 9 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"4-1\" // \"5-1\", \"6-1\", ... \"9-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": []\n}"
+								},
+								{
+									"name": "snssai 10 to 12 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": [\n    [\n      {\n        \"name\": \"nsi\",\n        \"value\": \"ManualDataSet-NetworkSlice-B\"\n      }\n    ]\n  ]\n}"
+								},
+								{
+									"name": "snssai 13 to 29 AMF1/AMF2 with/without core queryType",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"inputFields\": [\n        {\n            \"name\": \"nodeFDN\",\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\n        },\n        {\n            \"name\": \"snssai\",\n            \"value\": \"13-1\" // \"14-1\", \"15-1\", ..., \"29-1\"\n        }\n    ],\n    \"augmentationFields\": [\n        {\n            \"name\": \"nsi\"\n        }\n    ]\n    // \"queryType\": \"core\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{surl}}/v1/augmentation-info/augmentation",
+											"host": [
+												"{{surl}}"
+											],
+											"path": [
+												"v1",
+												"augmentation-info",
+												"augmentation"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"fields\": []\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "400_responses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inputFields\": [\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"nsi\"\r\n        }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/v1/augmentation-info/augmentation",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"v1",
+								"augmentation-info",
+								"augmentation"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "empty input fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        // {\r\n        //     \"name\": \"nodeFDN\",\r\n        //     \"value\": \"pcc-amf1\" // \"pcc-amf2\"\r\n        // },\r\n        // {\r\n        //     \"name\": \"snssai\",\r\n        //     \"value\": \"4-1\" // \"5-1\", \"6-1\", ... \"9-1\"\r\n        // }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"nsi\"\r\n        },\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "missing input fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"nsi\"\r\n        },\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "no request body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "empty request body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "empty augmentation fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        // {\r\n        //     \"name\": \"nsi\"\r\n        // }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "missing augmentation fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\r\n        }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "incorrect queryType",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"nsi\"\r\n        },\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ],\r\n    \"queryType\": \"notcoreran\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": null,\n    \"title\": \"Malformed Request, IllegalArgumentException\",\n    \"status\": 400,\n    \"detail\": \"Malformed Request, Reason: Invalid query type, notcoreran\",\n    \"instance\": null\n}"
+						},
+						{
+							"name": "duplicate snssai",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"12-1\" // \"11-1\", \"12-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"nsi\"\r\n        },\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": null,\n    \"title\": \"Malformed Request, IllegalArgumentException\",\n    \"status\": 400,\n    \"detail\": \"Malformed Request, Reason: Duplicate entry found in the inputFields: [snssai]\",\n    \"instance\": null\n}"
+						},
+						{
+							"name": "invalid augmentation fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf1\" // \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"notnsi\"\r\n        },\r\n        {\r\n            \"name\": \"notag\"\r\n        }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": null,\n    \"title\": \"Malformed Request, IllegalArgumentException\",\n    \"status\": 400,\n    \"detail\": \"Malformed Request, Reason: Duplicate entry found in the inputFields: [snssai]\",\n    \"instance\": null\n}"
+						},
+						{
+							"name": "missing nodeFDN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"10-1\" // \"11-1\", \"12-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"nsi\"\r\n        },\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n    // \"queryType\": \"core\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": null,\n    \"title\": \"Error occurred MandatoryParameterException\",\n    \"status\": 400,\n    \"detail\": \"Missing Mandatory Parameter in inputsFields with format 'name': <value>. The missing parameter(s): [nodeFDN]\",\n    \"instance\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "503 response",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"50-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/v1/augmentation-info/augmentation",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"v1",
+								"augmentation-info",
+								"augmentation"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "503 response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"50-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": null,\n    \"title\": \"Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.\",\n    \"status\": 503,\n    \"detail\": \"Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.\",\n    \"instance\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "401 response",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"40-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{surl}}/v1/augmentation-info/augmentation",
+							"host": [
+								"{{surl}}"
+							],
+							"path": [
+								"v1",
+								"augmentation-info",
+								"augmentation"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "401 response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"inputFields\": [\r\n        {\r\n            \"name\": \"nodeFDN\",\r\n            \"value\": \"pcc-amf2\"\r\n        },\r\n        {\r\n            \"name\": \"snssai\",\r\n            \"value\": \"40-1\"\r\n        }\r\n    ],\r\n    \"augmentationFields\": [\r\n        {\r\n            \"name\": \"ag\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{surl}}/v1/augmentation-info/augmentation",
+									"host": [
+										"{{surl}}"
+									],
+									"path": [
+										"v1",
+										"augmentation-info",
+										"augmentation"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": null,\n    \"title\": \"Error occurred Unauthorized\",\n    \"status\": 401,\n    \"detail\": \"401 UNAUTHORIZED: \\\"Unauthorized\\\"\",\n    \"instance\": null\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "surl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

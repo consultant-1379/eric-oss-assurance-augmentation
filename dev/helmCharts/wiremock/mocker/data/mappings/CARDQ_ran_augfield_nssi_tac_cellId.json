@@ -1,0 +1,198 @@
+{
+  "mappings": [
+    {
+      "name": "CARDQ_400_site_with_snssai",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "qos",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "plmnId",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "measObjLdn",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "localDn",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "400-bad"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "nssi"
+                },
+                {
+                  "name": "tac"
+                },
+                {
+                  "name": "cellId"
+                }
+              ],
+              "queryType": "ran"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Malformed Request, IllegalArgumentException",
+          "status": 400,
+          "detail": "Malformed Request, Reason: Invalid query type, notcoreorran",
+          "instance": null
+        }
+      }
+    },
+    {
+      "name": "CARDQ_500_site_with_snssai",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "qos",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "plmnId",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "measObjLdn",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "localDn",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "500-bad"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "nssi"
+                },
+                {
+                  "name": "tac"
+                },
+                {
+                  "name": "cellId"
+                }
+              ],
+              "queryType": "ran"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "type": null,
+          "title": "Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.",
+          "status": 500,
+          "detail": "Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.",
+          "instance": null
+        }
+      }
+    },
+    {
+      "priority": 10,
+      "name": "CARDQ_200_site_any_string",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "qos",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "plmnId",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "measObjLdn",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "localDn",
+                  "value": "${json-unit.any-string}"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.any-string}"
+                }
+              ],
+              "augmentationFields": [
+                {
+                  "name": "nssi"
+                },
+                {
+                  "name": "tac"
+                },
+                {
+                  "name": "cellId"
+                }
+              ],
+              "queryType": "ran"
+            },
+            "ignoreArrayOrder": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_ran_nssi_tac_cellId_0.json"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{{- if .Values.global.security.tls.enabled }}
+
+Mocked APIs are simultaneously available over https at the port {{ .Values.service.httpsPort}} for mTLS and over http at the port {{ .Values.service.httpPort}}.
+After the application start successfully, run following port-forward commands to access http and https endpoints locally:
+
+port-forward to https port:
+--------------------------
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "wiremock.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  kubectl port-forward $POD_NAME 8443:{{ .Values.service.httpsPort}}
+
+port-forward to http port:
+--------------------------
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "wiremock.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  kubectl port-forward $POD_NAME 8080:{{ .Values.service.httpPort}}
+
+{{- else }}
+
+Mocked APIs are available over http at the port {{ .Values.service.httpPort}}.
+After the application start successfully, run following port-forward command to access http endpoints locally:
+
+port-forward to https port:
+--------------------------
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "wiremock.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  kubectl port-forward $POD_NAME 8080:{{ .Values.service.httpPort}}
+
+{{- end }}

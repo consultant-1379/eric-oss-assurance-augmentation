@@ -1,0 +1,45 @@
+{
+  "type": "record",
+  "name": "ArdqRegistrationNotification",
+  "namespace": "com.ericsson.oss.air.aas.generated.model.notification",
+  "fields": [
+    {
+      "name": "ardqId",
+      "type": "string"
+    },
+    {
+      "name": "deprecatedInputSchemas",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "string"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "affectedInputSchemas",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "string"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "ardqNotificationType",
+      "type": {
+        "type": "enum",
+        "name": "ArdqNotificationType",
+        "symbols": [
+          "CREATE",
+          "DELETE",
+          "UPDATE"
+        ]
+      }
+    }
+  ]
+}

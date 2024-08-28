@@ -1,0 +1,14 @@
+{
+  "fields": [
+    [
+      {
+        "name": "nsi",
+        "value": "ManualDataSet-NetworkSlice-A"
+      },
+      {
+        "name": "ag",
+        "value": "AggregationEntityNSSI:EC-A"
+      }
+    ]
+  ]
+}

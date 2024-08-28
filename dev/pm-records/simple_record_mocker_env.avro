@@ -1,0 +1,2 @@
+{"subject": "5G.Core.PM_COUNTERS.AMF_Mobility_NetworkSlice_1", "data": {"dnPrefix":{"string":""}, "nodeFDN":"pcc-amf1", "elementType":null, "moFdn":"[snssai=11-1]", "snssai":{"string":"11-1"}, "snssai_sst":{"string":"1"}, "snssai_sd":{"string":"1"}, "ropBeginTime":"2024-01-25T18:00:00+00:00", "ropEndTime":"2024-01-25T18:15:00+00:00", "suspect":{"boolean":false}, "apn":null, "pmCounters":{"5G.Core.PM_COUNTERS.pmMetricsSchema":{"VS_NS_NbrRegisteredSub_5GS":{"int":15}}}}}
+

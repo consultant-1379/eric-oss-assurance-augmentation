@@ -1,0 +1,331 @@
+#
+# COPYRIGHT Ericsson 2022
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+openapi: "3.0.2"
+info:
+  x-api-id: 27bdccb8-6e34-4381-9ae7-68dff34800d6
+  x-audience: external-public
+  description: |
+    This API allows a client to create, retrieve, update, or delete an Analytics Reporting Dimensioning Query (ARDQ) registration, and also
+    allows a client to retrieve a list of all registered ARDQ IDs from the Assurance Augmentation Service (AAS).
+     
+    Each ARDQ registration includes the following attributes:
+       
+      - ARDQ ID.  A unique identifier for the rule set being registered
+      - ARDQ service URL, for example 'http://eric-oss-cardq:8080'
+      - Augmentation rules, where each rule comprises
+        - Input reference for looking up require input stream and schema information
+        - A list of augmentation fields, each comprising an output field and a set of input fields.
+         
+     
+  version: "1.0.0"
+  title: "Ericsson Assurance Augmentation Service"
+  license:
+    name: "COPYRIGHT Ericsson 2022"
+    url: "https://www.ericsson.com/en/legal"
+  termsOfService: "https://www.ericsson.com/en/legal"
+tags:
+  - name: IF.OSS_AIR.AUG.REG
+servers:
+  - url: http://eric-oss-assurance-augmentation:8080
+  - url: http://localhost:8080
+paths:
+    /v1/augmentation/registration/ardq:
+      post:
+        tags:
+          - "ARDQ Registration"
+        summary: "Registers a single ARDQ rule set with the AAS"
+        operationId: "CreateArdqRegistration"
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArdqRegistrationDto"
+        responses:
+          "201":
+            description: "Created. The ARDQ registration was successfully completed."
+          "400":
+            description: "Bad Request. The request was not well formed."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "409":
+            description: "Conflict. An ARDQ registration with this ID already exists."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "500":
+            description: "Internal Server Error. An unspecified error has occurred in the AAS."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "503":
+            description: "Service Unavailable. This service is currently unable to handle the request."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+     
+      put:
+        tags:
+          - "ARDQ Registration"
+        summary: "Updates an existing ARDQ rule set previously registered with the AAS"
+        operationId: "UpdateArdqRegistration"
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArdqRegistrationDto"
+        responses:
+          "200":
+            description: "OK. The ARDQ registration was successfully updated."
+          "400":
+            description: "Bad Request. The request was not well formed."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "404":
+            description: "Not Found. An ARDQ registration with this ID could not be found."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "500":
+            description: "Internal Server Error. An unspecified error has occurred in the AAS."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "503":
+            description: "Service Unavailable. This service is currently unable to handle the request."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+     
+    /v1/augmentation/registration/ardq/{ardq_id}:
+      get:
+        tags:
+          - "ARDQ Registration"
+        summary: "Retrieves a previously registered ARDQ rule set"
+        operationId: "RetrieveOneArdqRegistration"
+        parameters:
+          - in: path
+            description: "ID of a previously registered ARDQ rule set"
+            example: "cardq"
+            name: ardq_id
+            schema:
+              type: string
+              pattern: "^[a-zA-Z][_a-zA-Z0-9]*$"
+            allowReserved: false
+            required: true
+        responses:
+          "200":
+            description: "OK. The ARDQ registration was successfully retrieved"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ArdqRegistrationResponseDto"
+          "404":
+            description: "Not Found. An ARDQ registration with this ID could not be found."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "500":
+            description: "Internal Server Error. An unspecified error has occurred in the AAS."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "503":
+            description: "Service Unavailable. This service is currently unable to handle the request."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+             
+      delete:
+        tags:
+          - "ARDQ Registration"
+        summary: "Deletes a previously registered ARDQ rule set"
+        description: "This will delete the specified rule set, and immediately cause AAS to stop applying the augmentation previously specified by this rule. It will not remove the augmented schema from the Data Catalog, nor will it delete the associated data stream. To drop a single field from the rule set, use the PUT method described above."
+        operationId: "DeleteArdqRegistration"
+        parameters:
+          - in: path
+            description: "ID of a previously registered ARDQ rule set"
+            example: "cardq"
+            name: ardq_id
+            schema:
+              type: string
+              pattern: "^[a-zA-Z][_a-zA-Z0-9]*$"
+            required: true
+        responses:
+          "204":
+            description: "No Content. The ARDQ registration was successfully deleted"
+          "500":
+            description: "Internal Server Error. An unspecified error has occurred in the AAS."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "503":
+            description: "Service Unavailable. This service is currently unable to handle the request."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+             
+    /v1/augmentation/registration/ardq-ids:
+      get:
+        tags:
+          - "ARDQ Registration"
+        summary: "Retrieves the Ids of all currently registered ARDQ rule sets"
+        operationId: "RetrieveAllArdqRegistrationIds"
+        responses:
+          "200":
+            description: "OK. The operation completed successfully"
+            content:
+              application/json:
+                schema:
+                  example:
+                    - "cardq"
+                    - "other_ardq"
+                  type: array
+                  items:
+                    type: string
+          "500":
+            description: "Internal Server Error. An unspecified error has occurred in the AAS."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+          "503":
+            description: "Service Unavailable. This service is currently unable to handle the request."
+            content:
+              application/problem+json:
+                schema:
+                  $ref: "#/components/schemas/Problem"
+         
+components:
+  schemas:
+    ArdqAugmentationFieldDto:
+      type: object
+      required: [
+        output,
+        input
+      ]
+      properties:
+        output:
+          description: "Resulting field from the augmentation operation"
+          example: "nsi"
+          type: string
+          pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
+        input:
+          description: List of input fields used to construct the ARDQ query for the output field. For example [ "snssai", "moFDN" ]
+          example: [ "snssai", "moFDN" ]
+          type: array
+          minItems: 1
+          items:
+            type: string
+    ArdqAugmentationRuleDto:
+      description: "An augmentation rule to apply to this ARDQ instance"
+      type: object
+      required: [
+        inputSchema,
+        fields
+      ]
+      properties:
+        inputSchema:
+          description: "The reference for the input data stream and associated schema."
+          example: "something/something/something"
+          type: string
+        fields:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/ArdqAugmentationFieldDto"
+    ArdqRegistrationSchemaMappingDto:
+      properties:
+        inputSchema:
+          type: string
+          example: "5G|PM_COUNTERS|AMF_Mobility_NetworkSlice_1"
+        outputSchema:
+          type: string
+          example: "5G|PM_COUNTERS|cardq_AMF_Mobility_NetworkSlice_1"
+    ArdqRegistrationResponseDto:
+      description: "A single ARDQ registration including registered augmentation schema mappings"
+      allOf:
+        - $ref: '#/components/schemas/ArdqRegistrationDto'
+        - type: object
+          properties:
+            schemaMappings:
+              type: array
+              items:
+                $ref: "#/components/schemas/ArdqRegistrationSchemaMappingDto"
+    ArdqRegistrationDto:
+      description: "A single ARDQ registration"
+      type: object
+      required: [
+        ardqId,
+        ardqUrl,
+        rules
+      ]
+      properties:
+        ardqId:
+          description: "Unique identifier for this ARDQ registration."
+          example: "cardq"
+          type: string
+          pattern: "^[a-zA-Z][_a-zA-Z0-9]*$"
+        ardqUrl:
+          description: "Full path to the ARDQ service"
+          type: string
+          example: "http://eric-oss-cardq:8080"
+        ardqType:
+          description: "Dimensioning query type"
+          type: string
+          example: "core"
+        rules:
+          description: "List of augmentation rules to apply for this ARDQ registration"
+          type: array
+          minItems: 1
+          items:
+              $ref: "#/components/schemas/ArdqAugmentationRuleDto"
+    Problem:
+      description: Provides additional information in an error response, RFC 7807.
+      type: object
+      properties:
+        type:
+          type: string
+          example: "about:blank"
+        title:
+          type: string
+          example: "Method Not Allowed"
+        status:
+          type: integer
+          example: 405
+        detail:
+          type: string
+          example: "This method is not currently supported"
+        instance:          
+          type: string
+          example: "/v1/augmentation/registration/ardq-ids"
+        
+        

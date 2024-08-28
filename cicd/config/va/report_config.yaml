@@ -1,0 +1,45 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+model_version: 2.0
+product_va_config:
+  name: eric-oss-assurance-augmentation
+  product_name: eric-oss-assurance-augmentation
+  product_number: APR 201 719
+  version: {version}
+  va_template_version: 2.0.0
+  description: >-
+    eric-oss-assurance-augmentation Microservice
+  spoc: "**TODO**"
+  images:
+      - eric-oss-assurance-augmentation:{version}
+  # List of issue trackers used for citing Trouble Reports at the migitations
+  # (see below).
+  issue_trackers:
+  # The `default` key is looked up if no hint provided on what tracker
+  # should be used.  This is not added automatically, one has to provide
+  # this explicitly.
+    default: "https://eteamproject.internal.ericsson.com/browse/"
+  mitigations:
+    open_ports:
+      "8443/tcp":
+        # Change this to `true` if intended.
+        intended: true
+        # For intended ports, the `description` and `mitigation` keys and their values could be removed,
+        # otherwise:
+        # - describe why the port is open
+        description: >-
+          Intended, this is the port for the microservice REST API interface

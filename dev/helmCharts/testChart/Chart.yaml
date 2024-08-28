@@ -1,0 +1,61 @@
+apiVersion: v3
+name: dev-env
+description: A Helm chart for AAS microservice component-level testing
+
+type: application
+version: 0.1.0
+appVersion: '1.0.0'
+
+dependencies:
+  - name: eric-oss-assurance-augmentation
+    repository: "https://arm.seli.gic.ericsson.se/artifactory/proj-eric-oss-drop-helm"
+    version:  ">0.0.0-0"
+    condition: eric-oss-assurance-augmentation.enabled
+  - name: wiremock
+    repository: "file://../wiremock"
+    version: 1.0.0
+    tags:
+      - wiremock
+  - name: eric-data-coordinator-zk
+    repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm"
+    version: ">0.0.0-0"
+    condition: eric-data-coordinator-zk.enabled
+    tags:
+      - kafka
+  - name: eric-data-message-bus-kf
+    repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm"
+    version: ">0.0.0-0"
+    condition: eric-data-message-bus-kf.enabled
+    tags:
+      - kafka
+  - name: eric-oss-kf-resource-manager
+    repository: "https://arm.seli.gic.ericsson.se/artifactory/proj-eric-oss-drop-helm"
+    version: ">0.0.0-0"
+    condition: eric-oss-kf-resource-manager.enabled
+    tags:
+      - kafka
+  - alias: eric-oss-dmm-kf-op-sz
+    condition: eric-oss-dmm-kf-op-sz.enabled
+    name: eric-oss-kf-sz-op
+    repository: "https://arm.seli.gic.ericsson.se/artifactory/proj-eric-oss-drop-helm"
+    version: ">0.0.0-0"
+    tags:
+      - kafka
+  - name: eric-data-search-engine
+    repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm"
+    version: ">0.0.0-0"
+    condition: eric-data-search-engine.enabled
+    tags:
+      - logging
+  - name: eric-log-transformer
+    repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm"
+    version: ">0.0.0-0"
+    condition: eric-log-transformer.enabled
+    tags:
+      - logging
+  - name: eric-pm-server
+    repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm"
+    version: ">0.0.0-0"
+    condition: eric-pm-server.enabled
+    tags:
+      - metrics

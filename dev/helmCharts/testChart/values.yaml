@@ -1,0 +1,65 @@
+eric-oss-assurance-augmentation:
+  enabled: true
+  replicaCount: 1
+  dmm:
+    schemaRegistry:
+      url: http://wiremock:8080
+    dataCatalog:
+      url: http://wiremock:8080
+  log:
+    streamingMethod: indirect
+
+wiremock:
+  fullnameOverride: wiremock
+
+eric-data-coordinator-zk:
+  persistence:
+    persistentVolumeClaim:
+      enabled: true
+
+eric-data-message-bus-kf:
+  nameOverride: eric-oss-dmm-kf-op-sz-kafka-bootstrap
+  jmx:
+    enabled: true
+  persistence:
+    persistentVolumeClaim:
+      enabled: true
+
+eric-oss-dmm-kf-op-sz:
+  kafka:
+    enabled: true
+
+eric-data-search-engine:
+  autoSetRequiredWorkerNodeSysctl: true
+  replicaCount:
+    ingest: 1
+    master: 1
+    data: 1
+  metrics:
+    enabled: false
+
+eric-log-transformer:
+  config:
+    fileOutput: true
+
+eric-pm-server:
+  rbac:
+    appMonitoring:
+      enabled: true
+      configFileCreate: true
+
+tags:
+  wiremock: true
+  kafka: true
+  metrics: true
+  logging: false
+
+global:
+  security:
+    tls:
+      enabled: false
+  pullSecret: k8s-registry
+  log:
+    # Do not change this value. If dual or direct, then the search engine
+    # requires logshipper.
+    streamingMethod: indirect

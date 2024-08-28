@@ -1,0 +1,144 @@
+{
+  "id": 117,
+  "messageDataTopic": {
+    "id": 100,
+    "name": "eric-oss-assurance-augmentation-processing",
+    "encoding": "AVRO",
+    "messageSchemaIds": [
+      113,
+      114,
+      115,
+      116,
+      117,
+      111
+    ],
+    "messageBus": {
+      "id": 96,
+      "name": "msgBusAaug1",
+      "clusterName": "hall147",
+      "nameSpace": "data-cat-test",
+      "accessEndpoints": [
+        "http://eric-data-message-bus-kf:9092/"
+      ],
+      "notificationTopicIds": [],
+      "messageStatusTopicIds": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        101
+      ],
+      "messageDataTopicIds": [
+        96,
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    "dataProviderType": {
+      "id": 97,
+      "dataSpace": {
+        "id": 98,
+        "name": "5G",
+        "dataProviderTypeIds": [
+          97
+        ]
+      },
+      "dataCategoryType": {
+        "id": 99,
+        "dataCategoryName": "PM_COUNTERS"
+      },
+      "notificationTopicIds": [],
+      "messageDataTopicIds": [
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "providerVersion": "Core",
+      "providerTypeId": "Core"
+    },
+    "messageStatusTopic": {
+      "id": 101,
+      "name": "eric-oss-assurance-augmentation-processing",
+      "specificationReference": "5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2",
+      "encoding": "AVRO",
+      "messageDataTopicIds": [
+        100
+      ],
+      "messageBus": {
+        "id": 96,
+        "name": "msgBusAaug1",
+        "clusterName": "hall147",
+        "nameSpace": "data-cat-test",
+        "accessEndpoints": [
+          "http://eric-data-message-bus-kf:9092/"
+        ],
+        "notificationTopicIds": [],
+        "messageStatusTopicIds": [
+          96,
+          97,
+          98,
+          99,
+          100,
+          101
+        ],
+        "messageDataTopicIds": [
+          96,
+          97,
+          98,
+          99,
+          100
+        ]
+      }
+    }
+  },
+  "dataService": {
+    "id": 111,
+    "dataServiceInstance": [
+      {
+        "id": 102,
+        "dataService": {
+          "id": 111,
+          "dataServiceName": "eric-oss-assurance-augmentation"
+        },
+        "dataServiceInstanceName": "eric-oss-assurance-augmentation",
+        "controlEndPoint": "http://localhost:8082",
+        "consumedDataSpace": "5G",
+        "consumedDataCategory": "PM_COUNTERS",
+        "consumedDataProvider": "Core",
+        "consumedSchemaName": "AMF_Mobility_NetworkSlice_1",
+        "consumedSchemaVersion": "1"
+      }
+    ],
+    "predicateParameter": [
+      {
+        "id": 103,
+        "parameterName": "pd101",
+        "isPassedToConsumedService": true,
+        "dataService": {
+          "id": 111,
+          "dataServiceName": "eric-oss-assurance-augmentation"
+        }
+      }
+    ],
+    "dataServiceName": "eric-oss-assurance-augmentation"
+  },
+  "dataType": {
+    "id": 114,
+    "mediumId": 117,
+    "mediumType": "stream",
+    "schemaName": "cardq_AMF_Mobility_NetworkSlice_1",
+    "schemaVersion": "2",
+    "consumedDataSpace": "5G",
+    "consumedDataCategory": "PM_COUNTERS",
+    "consumedDataProvider": "Core",
+    "consumedSchemaName": "AMF_Mobility_NetworkSlice_1",
+    "consumedSchemaVersion": "1",
+    "external": true
+  },
+  "specificationReference": "5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2"
+}

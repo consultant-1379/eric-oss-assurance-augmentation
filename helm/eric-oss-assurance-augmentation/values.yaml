@@ -1,0 +1,353 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+# Default values for eric-oss-assurance-augmentation.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# global:
+  # createSchema: true
+#  timezone: UTC
+#  registry:
+#    repoPath:
+#    url: armdocker.rnd.ericsson.se
+#    pullPolicy: IfNotPresent
+#  #Secret must be manually created in the namespace, no default value
+#  pullSecret: eric-adp-example-secret
+#  fsGroup:
+#    manual: 10000
+#    namespace: true
+#  # The IP family the service belongs to when service.type is set to ClusterIP.
+#  # Options are: IPv4, IPv6
+#  internalIPFamily:
+#  security:
+#    policyBinding:
+#      create: true
+#    policyReferenceMap:
+#      default-restricted-security-policy: "<restricted security policy at customer deployment>"
+#    tls:
+#      enabled: true
+#      trustedInternalRootCa:
+#        secret: "eric-sec-sip-tls-trusted-root-cert"
+
+replicaCount: 2
+
+podDisruptionBudget:
+  # Minimum number/percentage of Pods that must remain available during the planned disruption.
+  # Value can be expressed as an integer or as a percentage. When specified as a percentage of the Pods,
+  # if it does not map to an exact number, Kubernetes rounds up to the nearest integer.
+  # minAvailable: 2 # example value for 2 pods defined as integer
+  minAvailable: "40%"
+
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+
+#Empty labels list for application deployment engineer to add more labels (In Compliance with DR-D1121-068).
+labels: {}
+
+imageCredentials:
+  repoPath: # overrides repoPath from eric-product-info.yaml
+  eric-oss-assurance-augmentation:
+    repoPath: # see default in eric-product-info.yaml
+    registry: {}
+      # overrides global registry url
+    # url:
+    #- Secret must be manually created in the namespace, no default value
+    # pullSecret: REPO_SECRET
+  eric-oss-assurance-augmentationTest:
+    repoPath: # see default in eric-product-info.yaml
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+annotations: {}
+
+service:
+  type: ClusterIP
+  # The port defaults to 8080 if TLS is disabled and to 8443 if TLS is enabled
+  # Only set this value to override the defaults
+  port:
+  endpoints:
+    chassisapi:
+      tls:
+        enforced: required
+        verifyClientCertificate: required
+database:
+  host: eric-oss-assurance-augmentation-db
+  port: 5432
+  # jdbcUrl is an optional parameter, when it is empty, it will build using the vendor, host, port, and dbName.
+  jdbcUrl:
+  vendor: postgresql
+  secret: eric-oss-assurance-augmentation-db-secret
+  userKey: pguserid
+  passwdKey: pgpasswd
+  dbaUserKey: super-user
+  dbaPasswdKey: super-pwd
+  dbName: aasdb
+
+  # database SSL related config
+  sslMode: disable
+  serverCertSecret: edb-server-cert
+  clientCertSecret: aug-edb-client-cert
+  clientCertKey:  client.key
+  clientCertRoot: client.crt
+  serverCertKey: cacert.crt
+
+  connectionTimeout: 60000
+  connectRetries: 9
+  schemaName: aug
+  retry:
+    maxAttempts: 10
+    waitDuration: 1s
+    enableExponentialBackoff: true
+    exponentialBackoffMultiplier: 2
+
+ingress:
+  enabled: false
+  ingressClass: OAM-IngressClass
+  hosts:
+    - host: chart-example.local
+      paths: [/]
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+eric-pm-server:
+  rbac:
+    appMonitoring:
+      enabled: true
+
+# TLS keystore password and key password are provided by a secret.
+# If not specified, the secret will be created on deployment. If
+# specified, it must be created prior to deploying this service.
+keystore:
+  creds:
+    secret:
+    passwdKey: passwd
+
+dmm:
+  schemaRegistry:
+    url: http://eric-schema-registry-sr:8081
+    circuitBreaker:
+      failureRateThreshold: 50
+      minimumNumberOfCalls: 15
+      waitDurationInOpenState: 50000
+      permittedNumberOfCallsInHalfOpenState: 9
+      slidingWindowSize: 30
+      slidingWindowType: count_based
+    retry:
+      maxAttempts: 3
+      waitDuration: 1s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+  dataCatalog:
+    url: http://eric-oss-data-catalog:9590
+    circuitBreaker:
+      failureRateThreshold: 50
+      minimumNumberOfCalls: 15
+      waitDurationInOpenState: 50000
+      permittedNumberOfCallsInHalfOpenState: 9
+      slidingWindowSize: 30
+      slidingWindowType: count_based
+    retry:
+      maxAttempts: 3
+      waitDuration: 1s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+
+ardq:
+  circuitBreaker:
+    failureRateThreshold: 50
+    minimumNumberOfCalls: 15
+    waitDurationInOpenState: 20000
+    permittedNumberOfCallsInHalfOpenState: 9
+    slidingWindowSize: 30
+    slidingWindowType: count_based
+  retry:
+    maxAttempts: 5
+    waitDuration: 1s
+    enableExponentialBackoff: true
+    exponentialBackoffMultiplier: 2
+
+analytics:
+  target: pmsch
+
+spring:
+  kafka:
+    # AAS sends heartbeats to Kafka to monitor connectivity between AAS and Kafka
+    # Configurable delays are in seconds
+    heartbeat:
+      initialDelay: 60
+      fixedDelay: 60
+    admin:
+      retry: 2
+      retryBackoffMs: 100
+      reconnectBackoffMs: 50
+      reconnectBackoffMaxMs: 30000
+      requestTimeoutMs: 30000
+      retryInterval: 10
+    # If AAS is deployed with TLS globally disabled, then the value of bootstrapServers will be used.
+    # Otherwise, the value of bootstrapServersMtls will be used to connect to Kafka.
+    bootstrapServers: eric-oss-dmm-kf-op-sz-kafka-bootstrap:9092
+    bootstrapServersMtls: eric-oss-dmm-kf-op-sz-kafka-bootstrap:9093
+    issuerReference: eric-oss-dmm-kf-op-sz-clients-ca-cert
+    strimziCluster: eric-oss-dmm-kf-op-sz
+    autoConfigTopics:
+      notification:
+        partitions: 1
+        replicas: 1
+        retention: 600000
+        minInSyncReplicas: 1
+      augmentationProcessing:
+        partitions: 3
+        replicas: 1
+        compression: lz4
+        retention: 7200000
+        minInSyncReplicas: 1
+    registrationNotification:
+      consumer:
+        maxPollRecords: 1000
+        maxPollIntervalMs: 30000
+      producer:
+        requestTimeoutMs: 30000
+    augmentationProcessing:
+      consumer:
+        maxPollRecords: 100
+        maxPollIntervalMs: 300000
+      producer:
+        requestTimeoutMs: 30000
+        retryBackoffMs: 100
+        reconnectBackoffMs: 50
+        reconnectBackoffMaxMs: 30000
+        batchSize: 163840
+        bufferMemory: 32000000
+        maxRequestSize: 2000
+        linger: 2000
+    availability:
+      retryInterval: 10000 #time in milliseconds
+      retryAttempts: 2147483647 #Equivalent to Integer.MAX_VALUE
+
+prometheus:
+  path: /actuator/prometheus
+  scrape: true
+
+terminationGracePeriodSeconds: 30
+
+resources:
+  eric-oss-assurance-augmentation:
+    requests:
+      memory: 2Gi
+      cpu: 500m
+      ephemeral-storage: ""
+    limits:
+      memory: 2Gi
+      cpu: 500m
+      ephemeral-storage: ""
+    jvm:
+      initialMemoryAllocationPercentage:  50
+      smallMemoryAllocationMaxPercentage: 70
+      largeMemoryAllocationMaxPercentage: 50
+  eric-oss-assurance-augmentationTest:
+    requests:
+      memory: 128Mi
+      cpu: 50m
+      ephemeral-storage: ""
+    limits:
+      memory: 1Gi
+      cpu: 256m
+      ephemeral-storage: ""
+    jvm:
+      initialMemoryAllocationPercentage: 50
+      smallMemoryAllocationMaxPercentage: 70
+      largeMemoryAllocationMaxPercentage: 50
+
+autoScaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+topologySpreadConstraints:
+  deployment: []
+  test: []
+
+tolerations:
+  - key: node.kubernetes.io/not-ready
+    operator: Exists
+    effect: NoExecute
+    tolerationSeconds: 0
+  - key: node.kubernetes.io/unreachable
+    operator: Exists
+    effect: NoExecute
+    tolerationSeconds: 0
+
+affinity:
+  podAntiAffinity: "soft"
+  topologyKey: "kubernetes.io/hostname"
+
+probes:
+  eric-oss-assurance-augmentation:
+    livenessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 120
+      periodSeconds: 10
+      timeoutSeconds: 10
+    readinessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 120
+      periodSeconds: 10
+      timeoutSeconds: 10
+
+podPriority:
+  eric-oss-assurance-augmentation:
+    priorityClassName: ""
+# choice='unconfined, runtime/default, localhost' [ default= runtime/default ]
+# Configuration of AppArmor profile type. The following values are possible:
+# unconfined  - Indicates that there is no profile loaded.
+# runtime/default - Applies the default profile of the container engine.
+# localhost   - Applies a specific profile loaded on the host
+appArmorProfile:
+  type: runtime/default
+seccompProfile:
+  type: RuntimeDefault
+
+kubernetesDefaultService:
+  url: https://kubernetes.default.svc.cluster.local
+
+# Set to Default local streamingMethod
+# Can be one of the following:
+#   direct: Direct streaming to the Log Aggregator (Log Transformer).
+#   indirect: Stdout to infrastructure logging framework.
+#   dual: Stdout to infrastructure logging framework and direct streaming to Log Aggregator.
+#   null - null or absent parameter the streaming method is determined by global.log.streamingMethod
+log:
+  streamingMethod: null

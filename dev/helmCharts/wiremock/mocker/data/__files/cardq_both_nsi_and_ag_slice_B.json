@@ -1,0 +1,24 @@
+{
+  "fields": [
+    [
+      {
+        "name": "nsi",
+        "value": "ManualDataSet-NetworkSlice-B"
+      },
+      {
+        "name": "ag",
+        "value": "AggregationEntitySite:EC-Site"
+      }
+    ],
+    [
+      {
+        "name": "nsi",
+        "value": "ManualDataSet-NetworkSlice-B"
+      },
+      {
+        "name": "ag",
+        "value": "AggregationEntityNSSI:EC-B"
+      }
+    ]
+  ]
+}

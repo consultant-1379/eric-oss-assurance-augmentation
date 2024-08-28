@@ -1,0 +1,25 @@
+{
+  "id": "00e01a30-9e6f-11ed-a8fc-0242ac120002",
+  "name": "DC_put_v1_message_schema_400",
+  "request": {
+    "urlPath": "/catalog/v1/message-schema",
+    "method": "PUT",
+    "bodyPatterns": [
+      {
+        "equalToJson": "{\"dataSpace\": {}, \"dataService\": {\"dataServiceName\": \"dataservicename102\"}, \"dataCategory\": {\"dataCategoryName\": \"CM_EXPORTS1\"}, \"dataProviderType\": {\"providerVersion\": \"Vv101\", \"providerTypeId\": \"vv101\"}, \"messageStatusTopic\": {\"name\": \"topic102\", \"messageBusId\": 1, \"specificationReference\": \"SpecRef101\", \"encoding\": \"JSON\"}, \"messageDataTopic\": {\"name\": \"topic102\", \"messageBusId\": 1, \"encoding\": \"JSON\"}, \"dataServiceInstance\": {\"dataServiceInstanceName\": \"dsinst101\", \"controlEndPoint\": \"http://localhost:8082\", \"consumedDataSpace\": \"4G\", \"consumedDataCategory\": \"4G\", \"consumedDataProvider\": \"4G\", \"consumedSchemaName\": \"SCH2\", \"consumedSchemaVersion\": \"2\"}, \"dataType\": {\"mediumType\": \"stream\", \"schemaName\": \"SCH2\", \"schemaVersion\": \"2\", \"isExternal\": true, \"consumedDataSpace\": \"4G\", \"consumedDataCategory\":\"4G\", \"consumedDataProvider\": \"4G\", \"consumedSchemaName\": \"4G\", \"consumedSchemaVersion\": \"2\"}, \"supportedPredicateParameter\": {\"parameterName\": \"pd101\", \"isPassedToConsumedService\": true}, \"messageSchema\": {\"specificationReference\": \"SpecRef101\"}}"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "path": "/catalog/v1/message-schema",
+      "timeStamp": "2023-03-17T05:17:26.383209",
+      "message": "Invalid request values - name is mandatory field in dataSpace"
+    }
+  }
+}

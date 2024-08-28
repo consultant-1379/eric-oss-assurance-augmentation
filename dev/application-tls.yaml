@@ -1,0 +1,193 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+analytics:
+  target: pmsch
+
+dmm:
+  schemaRegistry:
+    url: http://localhost:8080
+  dataCatalog:
+    url: http://localhost:8080
+
+spring:
+  kafka:
+    admin:
+      retry: 2
+      retryBackoffMs: 100
+      reconnectBackoffMs: 50
+      reconnectBackoffMaxMs: 30000
+      requestTimeoutMs: 30000
+      retryInterval: 10
+    bootstrapServers: localhost:9993
+    autoConfigTopics:
+      notification:
+        name: eric-oss-assurance-augmentation-notification
+        partitions: 1
+        replicas: 1
+        retention: 600000
+        minInSyncReplicas: 1
+      augmentationProcessing:
+        name: eric-oss-assurance-augmentation-processing
+        partitions: 3
+        replicas: 1
+        compression: lz4
+        retention: 7200000
+        minInSyncReplicas: 1
+    registrationNotification:
+      topic: eric-oss-assurance-augmentation-notification
+      consumer:
+        maxPollRecords: 1000
+        maxPollIntervalMs: 30000
+      producer:
+        requestTimeoutMs: 30000
+    augmentationProcessing:
+      topic: eric-oss-assurance-augmentation-processing
+      consumer:
+        maxPollRecords: 100
+        maxPollIntervalMs: 300000
+      producer:
+        requestTimeoutMs: 30000
+        retryBackoffMs: 100
+        reconnectBackoffMs: 50
+        reconnectBackoffMaxMs: 30000
+        batchSize: 163840
+        bufferMemory: 32000000
+        maxRequestSize: 2000
+        linger: 2000
+    availability:
+      retryInterval: 10000
+      retryAttempts: 2147483647
+      authExceptionRetryInterval: 10
+  # graceful shutdown wait period for serving in-flight requests
+  lifecycle:
+    timeout-per-shutdown-phase: ${GRACEFUL_SHUTDOWN_TIMEOUT:30s}
+  flyway:
+    create-schemas: true
+    schemas: aug
+    default-schema: aug
+    url: jdbc:postgresql://localhost:5432/aasdb?connectTimeout=60000&
+    user: postgres
+    password: postgres
+    connectRetries: 9
+    validate-on-migrate: false
+    placeholders:
+      augmentSchemaName: aug
+      databaseUser: "postgres"
+  datasource:
+    hikari:
+      enabled: true
+      jdbc-url: jdbc:postgresql://localhost:5432/aasdb?connectTimeout=60000&
+      username: postgres
+      password: postgres
+      driver-class-name: org.postgresql.Driver
+      schema: aug
+resilience4j:
+  circuitbreaker:
+    instances:
+      schemaRegistry:
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 15
+        waitDurationInOpenState: 50000
+        permittedNumberOfCallsInHalfOpenState: 9
+        slidingWindowSize: 30
+        slidingWindowType: count_based
+      dataCatalog:
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 15
+        waitDurationInOpenState: 50000
+        permittedNumberOfCallsInHalfOpenState: 9
+        slidingWindowSize: 30
+        slidingWindowType: count_based
+      ardq:
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 15
+        waitDurationInOpenState: 20000
+        permittedNumberOfCallsInHalfOpenState: 9
+        slidingWindowSize: 30
+        slidingWindowType: count_based
+
+  retry:
+    instances:
+      ardq:
+        max-attempts: 5
+        wait-duration: 1s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+      dataCatalog:
+        max-attempts: 3
+        wait-duration: 1s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+      schemaRegistry:
+        max-attempts: 3
+        wait-duration: 1s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+      jdbc:
+        max-attempts: 10
+        wait-duration: 1s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+
+server:
+  shutdown: graceful
+  port: 8089
+
+# Required configuration to change the logging level at runtime using the EO Common Logging library
+ericsson:
+  logging:
+    runtime-level-control:
+      enabled: false
+
+logging:
+  level:
+    com:
+      ericsson:
+        adp:
+          security:
+            certm:
+              certificatewatcher: INFO
+    org:
+      apache:
+        kafka:
+          clients:
+            admin:
+              internals:
+                AdminMetadataManager: WARN
+              AdminClientConfig: WARN
+            NetworkClient: WARN
+            consumer: WARN
+
+
+adp-certificate:
+  discovery:
+    root-read-path: dev/certs/aas
+    root-write-path: dev/certs/adp-certificate
+
+    keystore-relative-dir: keystore
+    truststore-relative-dir: truststore
+    keyPassword: "password"
+    password: "password"
+
+
+# General security configuration
+security:
+  # Default time period in milliseconds to periodically generate a new SSL context iff certificate rotation has occurred
+  sampleWindowDurationMs: 5000
+  server:
+    mtls:
+      enabled: true

@@ -1,0 +1,30 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+Kubesec:
+  Product: 'eric-oss-assurance-augmentation Application'
+  Product_internal: 'eric-oss-assurance-augmentation'
+  Product_contact: 'PDLPDLSWOR@pdl.internal.ericsson.com'
+  KubesecYAML:
+    Scan: true
+    armLinks: #Add the ARM links which doesn't require authentication here
+      Links:
+      - '%{HELM_CHART}'
+      valuesOverride: '' #Array #If override is needed, add the values yaml names in the same order as arm links
+  KubesecCluster:
+    Scan: false
+    KubeconfigFile: "admin.conf"
+    namespace: ''

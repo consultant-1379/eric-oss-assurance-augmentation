@@ -1,0 +1,30 @@
+dependencies:
+- name: eric-oss-assurance-augmentation
+  repository: https://arm.seli.gic.ericsson.se/artifactory/proj-eric-oss-drop-helm
+  version: 1.273.0-1
+- name: wiremock
+  repository: file://../wiremock
+  version: 1.0.0
+- name: eric-data-coordinator-zk
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm
+  version: 3.3.0+5
+- name: eric-data-message-bus-kf
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm
+  version: 2.23.0-22
+- name: eric-oss-kf-resource-manager
+  repository: https://arm.seli.gic.ericsson.se/artifactory/proj-eric-oss-drop-helm
+  version: 1.75.0-1
+- name: eric-oss-kf-sz-op
+  repository: https://arm.seli.gic.ericsson.se/artifactory/proj-eric-oss-drop-helm
+  version: 1.2.0-12
+- name: eric-data-search-engine
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm
+  version: 13.4.0-15
+- name: eric-log-transformer
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm
+  version: 16.1.0-19
+- name: eric-pm-server
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm
+  version: 13.0.0-11
+digest: sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+generated: "2024-04-03T01:34:22.814919-04:00"

@@ -1,0 +1,25 @@
+{
+  "id": "4c444a6c-ca6d-11ed-afa1-0242ac120002",
+  "name": "schemas_subject_versions_returns_schema_id",
+  "request": {
+    "url": "/subjects/5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/versions?normalize=false&deleted=true",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "equalToJson": "{\"Invalid Schema\": \"422\"}"
+      }
+    ]
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "Content-Type": "application/vnd.schemaregistry.v1+json",
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Vary": "Accept-Encoding, User-Agent"
+    },
+    "jsonBody": {
+      "error_code": 422,
+      "message": "Error code 42201 – Invalid schema"
+    }
+  }
+}

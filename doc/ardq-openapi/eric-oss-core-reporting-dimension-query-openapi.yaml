@@ -1,0 +1,287 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+openapi: 3.0.2
+info:
+  x-api-id: 6a4a1761-c3f8-41b8-948b-9e36f0faf829
+  x-audience: external-public
+  title: Core Analytics Reporting Dimensioning Query (CARDQ) Service
+  description: |
+    This REST-API is designed to be used by the Assurance Augmentation Service (AAS) to augment 
+    topology information to performance metrics (PM) data related to core network functions (NF)
+    for core slice key performance indicators (KPIs). This API enables us to recognize the list of 
+    NSI and aggregationEntities related to the core NF.
+  contact:
+    name: Edward Beingessner
+    email: edward.beingessner@ericsson.com
+  license:
+    name: "COPYRIGHT Ericsson 2022"
+    url: "https://www.ericsson.com/en/legal"
+  termsOfService: "https://www.ericsson.com/en/legal"
+  version: 1.0.0
+tags:
+  - name: IF.OSS_AIR.AUG.DATA
+paths:
+  /v1/augmentation-info/augmentation:
+    post:
+      tags:
+        - ARDQ Augmentation
+      summary: This endpoint requests the data that will be augmented onto a
+        Data Management Inventory (DMI) record.
+      description: This path is primarily responsible for augmenting slice
+        data from Common Topology Service (CTS) to the PM counter
+        records of the 5G core slices.
+      operationId: recordAugmentationRequest
+      requestBody:
+        description: |
+          In the post request:
+          * The information fields for the record are passed as the `inputFields`.
+          * The information fields required for augmentation will be passed in as 
+            the `augmentationFields`.
+          In the response, the augmentationFields are returned with the values populated.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AugmentationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation. The entity (network object) names were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Augmentation'
+        '400':
+          description: Bad Request. The request cannot be processed due to a client error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized. The request cannot be completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '503':
+          description: Service temporarily unavailable. The service cannot handle
+            requests at this time. Please try again later.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /v1/augmentation-info/augmentation/query/types:
+    get:
+      tags:
+        - ARDQ Augmentation
+      summary: Returns a list of augmentation query types supported by this ARDQ instance.
+      description: |
+        This operation returns a list of dimensioning query types supported by
+        this ARDQ instance, which allows a client to discover the augmentation
+        query types available from this server. This, in turn, allows a client
+        to validate augmentation configuration provided to the Assurance
+        Augmentation Service (AAS) and allows the AAS to reject augmentation
+        configuration targeting an unsupported dimensioning query type.
+      operationId: getDimensioningQueryTypes
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AugmentationQueryTypeResponse'
+        '501':
+          description: Not implemented. This ARDQ service does not distinguish
+            dimensioning query types.
+        '503':
+          description: Service temporarily unavailable
+
+components:
+  schemas:
+    AugmentationRequest:
+      description: Augmentation request comprising the input fields and values required to perform the dimensioning query and the requested
+        augmentation fields.
+      type: object
+      required: [ inputFields, augmentationFields ]
+      properties:
+        inputFields:
+          type: array
+          minItems: 1
+          description: Record information used to get augmentation data
+          items:
+            $ref: '#/components/schemas/QueryField'
+        augmentationFields:
+          type: array
+          minItems: 1
+          description: Required entity types for augmentation
+          items:
+            $ref: '#/components/schemas/AugmentationFieldRequest'
+          example: [
+            {
+              "name": "nsi"
+            },
+            {
+              "name": "ec"
+            }
+          ]
+        queryType:
+          type: string
+          description: Optional queryType, defaults to "core".
+          default: "core"
+    Augmentation:
+      description: The augmentation response schema
+      type: object
+      properties:
+        fields:
+          type: array
+          description: Fields returned with the response to augmentation request
+          items:
+            $ref: '#/components/schemas/AugmentationFieldArray'
+          example: [
+            [
+              {
+                "name": "nsi",
+                "value": "NSI-A"
+              },
+              {
+                "name": "ec",
+                "value": "EC-1"
+              }
+            ],
+            [
+              {
+                "name": "nsi",
+                "value": "NSI-A"
+              },
+              {
+                "name": "ec",
+                "value": "EC-2"
+              }
+            ]
+          ]
+    QueryField:
+      description: The schema represents the fields related to PM data.
+      type: object
+      required: [ name, value ]
+      properties:
+        name:
+          type: string
+          description: Mandatory field for querying slice data
+          example: 'nodeFDN'
+        value:
+          type: string
+          example: 'nodeFDN-1'
+    AugmentationFieldRequest:
+      description: This schema specifies the fields requested for augmentation.
+      type: object
+      required: [ name ]
+      properties:
+        name:
+          type: string
+          description: This field is requested to be augmented.
+          example: 'nsi'
+    AugmentationFieldArray:
+      description: Array of augmentation field response name/value pairs.
+      type: array
+      items:
+        $ref: '#/components/schemas/AugmentationField'
+      example: [
+        {
+          "name": "nsi",
+          "value": "nsi-1"
+        },
+        {
+          "name": "ec",
+          "value": "ec-1"
+        }
+      ]
+    AugmentationField:
+      description: The augmentation field schema
+      type: object
+      properties:
+        name:
+          type: string
+          description: The new information to be augmented into the records
+          example: 'nsi'
+        value:
+          type: string
+          example: "NSI-B"
+    ProblemDetails:
+      description: >
+        The definition of the general "ProblemDetails" data structure from
+        IETF RFC 7807 [19] is reproduced in this structure. Compared to
+        the general framework defined in IETF RFC 7807 [19], the "status"
+        and "detail" attributes are mandated to be included by the present
+        document, to ensure that the response contains additional textual
+        information about an error. IETF RFC 7807 [19] foresees
+        extensibility of the "ProblemDetails" type. It is possible that
+        particular APIs in the present document, or particular
+        implementations, define extensions to define additional attributes
+        that provide more information about the error. The description
+        column only provides some explanation of the meaning to Facilitate
+        understanding of the design. For a full description, see IETF RFC
+        7807 [19].
+      type: object
+      required:
+        - status
+        - detail
+      properties:
+        type:
+          description: >
+            A URI reference according to IETF RFC 3986 [5] that identifies
+            the problem type. It is encouraged that the URI provides
+            human-readable documentation for the problem (e.g. using HTML)
+            when de-referenced. When this member is not present, its value
+            is assumed to be "about:blank".
+          type: string
+          format: URI
+        title:
+          description: >
+            A short, human-readable summary of the problem type. It should
+            not change from occurrence to occurrence of the problem,
+            except for purposes of localization. If type is given and
+            other than "about:blank", this attribute shall also be
+            provided. A short, human-readable summary of the problem
+            type. It SHOULD NOT change from occurrence to occurrence of
+            the problem, except for purposes of localization (e.g., using
+            proactive content negotiation; see [RFC7231], Section 3.4).
+          type: string
+        status:
+          description: >
+            The HTTP status code for this occurrence of the problem. The
+            HTTP status code ([RFC7231], Section 6) generated by the
+            origin server for this occurrence of the problem.
+          type: integer
+        detail:
+          description: >
+            A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        instance:
+          description: >
+            A URI reference that identifies the specific occurrence of the
+            problem. It may yield further information if de-referenced.
+          type: string
+          format: URI
+    AugmentationQueryTypeResponse:
+      type: object
+      required: [ queryType ]
+      properties:
+        queryType:
+          type: string
+          example: 'core'

@@ -1,0 +1,21 @@
+{
+  "id": "00e01a30-9e6f-11ed-a8fc-0242ac120002",
+  "name": "Catalog_put_v1_message_schema_200",
+  "request": {
+    "url": "/catalog/v1/message-schema",
+    "method": "PUT",
+    "bodyPatterns": [
+      {
+        "equalToJson": "{ \"id\": 102, \"dataSpace\": { \"name\": \"5G\" }, \"dataService\": { \"dataServiceName\": \"eric-oss-assurance-augmentation\" }, \"dataCategory\": { \"dataCategoryName\": \"PM_COUNTERS\" }, \"dataProviderType\": { \"providerVersion\": \"Vv101\", \"providerTypeId\": \"vv101\" }, \"messageStatusTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\", \"encoding\": \"AVRO\" }, \"messageDataTopic\": { \"name\": \"eric-oss-assurance-augmentation-processing\", \"messageBusId\": 96, \"encoding\": \"AVRO\" }, \"dataServiceInstance\": { \"dataServiceInstanceName\": \"eric-oss-assurance-augmentation\", \"controlEndPoint\": \"http://localhost:8082\", \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"dataType\": { \"mediumType\": \"stream\", \"schemaName\": \"cardq_AMF_Mobility_NetworkSlice_1\", \"schemaVersion\": \"2\", \"isExternal\": true, \"consumedDataSpace\": \"5G\", \"consumedDataCategory\": \"PM_COUNTERS\", \"consumedDataProvider\": \"Core\", \"consumedSchemaName\": \"AMF_Mobility_NetworkSlice_1\", \"consumedSchemaVersion\": \"1\" }, \"supportedPredicateParameter\": { \"parameterName\": \"pd101\", \"isPassedToConsumedService\": true }, \"messageSchema\": { \"specificationReference\": \"5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/2\" } }"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "data_catalog_message_schema_response_updated.json"
+  }
+}

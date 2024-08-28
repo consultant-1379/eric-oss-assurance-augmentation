@@ -1,0 +1,157 @@
+#
+# COPYRIGHT Ericsson 2023
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+dmm:
+  dataCatalog:
+    url: http://localhost:9590
+  schemaRegistry:
+    url: http://localhost:8081
+
+analytics:
+  target: pmsch
+
+spring:
+  kafka:
+    admin:
+      retry: 2
+      retryBackoffMs: 100
+      reconnectBackoffMs: 50
+      reconnectBackoffMaxMs: 30000
+      requestTimeoutMs: 30000
+      retryInterval: 10
+    bootstrapServers: localhost:9092
+    autoConfigTopics:
+      notification:
+        name: eric-oss-assurance-augmentation-notification
+        partitions: 1
+        replicas: 1
+        retention: 600000
+        minInSyncReplicas: 1
+      augmentationProcessing:
+        name: eric-oss-assurance-augmentation-processing
+        partitions: 3
+        replicas: 1
+        compression: lz4
+        retention: 7200000
+        minInSyncReplicas: 1
+    registrationNotification:
+      topic: eric-oss-assurance-augmentation-notification
+      consumer:
+        maxPollRecords: 1000
+        maxPollIntervalMs: 30000
+      producer:
+        requestTimeoutMs: 30000
+    augmentationProcessing:
+      topic: eric-oss-assurance-augmentation-processing
+      consumer:
+        maxPollRecords: 100
+        maxPollIntervalMs: 300000
+      producer:
+        requestTimeoutMs: 30000
+        retryBackoffMs: 100
+        reconnectBackoffMs: 50
+        reconnectBackoffMaxMs: 30000
+        batchSize: 163840
+        bufferMemory: 32000000
+        maxRequestSize: 2000
+        linger: 2000
+    availability:
+      retryInterval: 1000 #time in milli seconds
+      retryAttempts: 2 #Equivalent to Integer.MAX_VALUE
+  flyway:
+    create-schemas: true
+    schemas: "aug"
+    default-schema: aug
+    url: jdbc:postgresql://localhost:5432/aasdb
+    user: aas
+    password: custompwd
+    connectRetries: 3
+    validate-on-migrate: false
+    placeholders:
+      augmentSchemaName: "aug"
+      databaseUser: aas
+
+  datasource:
+    hikari:
+      enabled: true
+      jdbc-url: jdbc:postgresql://localhost:5432/aasdb
+      username: aas
+      password: custompwd
+      driver-class-name: org.postgresql.Driver
+      schema: aug
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      schemaRegistry:
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 50000
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: count_based
+      dataCatalog:
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 50000
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: count_based
+      ardq:
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 50000
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: count_based
+  retry:
+    instances:
+      ardq:
+        max-attempts: 3
+        wait-duration: 100ms
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+        retry-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - org.springframework.web.client.ResourceAccessException
+      dataCatalog:
+        max-attempts: 3
+        wait-duration: 100ms
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+        retry-exceptions:
+          - com.ericsson.oss.air.exception.http.problem.exception.HttpInternalServerErrorException
+          - org.springframework.web.client.ResourceAccessException
+      schemaRegistry:
+        max-attempts: 3
+        wait-duration: 100ms
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+        retry-exceptions:
+          - io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException
+          - java.io.IOException
+      jdbc:
+        max-attempts: 3
+        wait-duration: 100ms
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+        retry-exceptions:
+          - org.springframework.jdbc.CannotGetJdbcConnectionException

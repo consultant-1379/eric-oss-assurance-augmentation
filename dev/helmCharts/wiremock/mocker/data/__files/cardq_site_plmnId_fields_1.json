@@ -1,0 +1,14 @@
+{
+  "fields": [
+    [
+      {
+        "name": "site",
+        "value": "GeographicSite:DataCenter1"
+      },
+      {
+        "name": "plmnId",
+        "value": "100-101"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,36 @@
+@startuml aas-component-view
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(AS, "Ericsson Service Assurance") {
+    Component(AAS, "Assurance Augmentation Service", "Microservice", "Augments data records")
+}
+
+System_Ext(AC, "Augmentation Creator")
+System_Ext(AIP, "Augmentation Information Provider")
+
+
+Container_Boundary(DMM, "Data Management & Movement") {
+    System_Ext(DC, "Data Catalog")
+    System_Ext(SR, "Schema Registry SR")
+    System_Ext(KF, "KF Operator SZ")
+}
+
+Container_Boundary(Log, "Log Transformer") {
+    System_Ext(LogTransformer, "Log Transformer")
+}
+
+Container_Boundary(PM, "PM Server") {
+    System_Ext(Prometheus, "Prometheus")
+}
+
+
+'relations
+Rel(AAS, DC, "UC.CAT.10, UC.CAT.21", "REST")
+Rel(AAS, SR, "IF.REST", "REST")
+Rel(AAS, KF, "UC.KFSZOP.1, UC.KFSZOP.2")
+Rel(AC, AAS, "Register augmentation", "REST")
+Rel_L(AAS, AIP, "Retrieve augmentation data", "REST")
+Rel(PM, AAS, "IF.PROM.SCRAPING", "REST")
+Rel_R(AAS, Log, "IF.LOG.IN.HTTP", "REST")
+
+@enduml

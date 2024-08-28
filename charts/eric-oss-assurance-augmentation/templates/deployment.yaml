@@ -1,0 +1,296 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "eric-oss-assurance-augmentation.fullname" . }}
+  labels:
+  {{- include "eric-oss-assurance-augmentation.labels" . | nindent 4 }}
+  annotations:
+  {{- include "eric-oss-assurance-augmentation.prometheus" . | nindent 4 }}
+spec:
+{{- $g := fromJson (include "eric-oss-assurance-augmentation.global" .) -}}
+{{- if not .Values.autoScaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "eric-oss-assurance-augmentation.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  strategy:
+    type: {{ .Values.updateStrategy.type | quote }}
+    {{- if and (eq .Values.updateStrategy.type "RollingUpdate") .Values.updateStrategy.rollingUpdate }}
+    rollingUpdate:
+      maxUnavailable: {{ .Values.updateStrategy.rollingUpdate.maxUnavailable }}
+      maxSurge: {{ .Values.updateStrategy.rollingUpdate.maxSurge }}
+    {{- end }}
+  template:
+    metadata:
+      labels:
+      {{- include "eric-oss-assurance-augmentation.labels-and-logStream" . | indent 8 }}
+      annotations:
+      {{- include "eric-oss-assurance-augmentation.prometheus-and-container" . | nindent 8 }}
+    spec:
+    {{- if include "eric-oss-assurance-augmentation.pullSecret" . }}
+      imagePullSecrets:
+        - name: {{ include "eric-oss-assurance-augmentation.pullSecret" . | quote}}
+      {{- end }}
+      serviceAccountName: {{ template "eric-oss-assurance-augmentation.fullname" . }}
+      securityContext:
+        fsGroup: {{ include "eric-oss-assurance-augmentation.fsGroup.coordinated" . }}
+        {{- include "eric-oss-assurance-augmentation.seccomp-profile" . | indent 8 }}
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}
+        - name: application-config-volume
+          configMap:
+            defaultMode: 493
+            name: {{ include "eric-oss-assurance-augmentation.name" . }}-application-config
+        - name: log-control-config-volume
+          configMap:
+            name: {{ include "eric-oss-assurance-augmentation.name" . }}-log-config
+        {{- if $g.security.tls.enabled }}
+        - name: root-ca-volume
+          secret:
+            optional: true
+            secretName: {{ $g.security.tls.trustedInternalRootCa.secret }}
+        - name: pm-ca-volume
+          secret:
+            optional: true
+            secretName: eric-pm-server-ca
+        - name: server-cert-volume
+          secret:
+            optional: true
+            secretName: {{ include "eric-oss-assurance-augmentation.fullname" . }}-server-cert
+        - name: log-cert-volume
+          secret:
+            optional: true
+            secretName: {{ include "eric-oss-assurance-augmentation.fullname" . }}-log-cert
+        - name: kafka-cert-volume
+          secret:
+            optional: true
+            secretName: {{ include "eric-oss-assurance-augmentation.fullname" . }}-kafka-cert
+        {{- end }}
+        {{- include "eric-oss-assurance-augmentation.db.server-cert-volume" . | nindent 8 }}
+        {{- include "eric-oss-assurance-augmentation.db.client-cert-volume" . | nindent 8 }}
+      containers:
+        - name: eric-oss-assurance-augmentation
+          image: {{ template "eric-oss-assurance-augmentation.mainImagePath" . }}
+          imagePullPolicy: {{ template "eric-oss-assurance-augmentation.registryImagePullPolicy" . }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - all
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp-volume
+            - name: application-config-volume
+              mountPath: /config/application-prod.yaml
+              subPath: application-prod.yaml
+            - name: log-control-config-volume
+              mountPath: /logcontrol
+            {{- if $g.security.tls.enabled }}
+            - name: root-ca-volume
+              mountPath: /run/secrets/rootca/truststore
+              readOnly: true
+            - name: pm-ca-volume
+              mountPath: /run/secrets/pmca/truststore
+              readOnly: true
+            - name: server-cert-volume
+              mountPath: /run/secrets/server/keystore
+              readOnly: true
+            - name: log-cert-volume
+              mountPath: /run/secrets/log/keystore
+              readOnly: true
+            - name: kafka-cert-volume
+              mountPath: /run/secrets/kafka/keystore
+              readOnly: true
+            {{- end }}
+            {{- include "eric-oss-assurance-augmentation.db.server-cert-volume-mount" . | nindent 12 }}
+            {{- include "eric-oss-assurance-augmentation.db.client-cert-volume-mount" . | nindent 12 }}
+          ports:
+            {{- if $g.security.tls.enabled }}
+            - name: https-tls
+            {{- else }}
+            - name: http
+            {{- end }}
+              containerPort: {{ include "eric-oss-assurance-augmentation.service-port" . }}
+              protocol: TCP
+          livenessProbe:
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "initialDelaySeconds") }}
+            {{ print "initialDelaySeconds: " (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "initialDelaySeconds") }}
+          {{- end }}
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "failureThreshold") }}
+            {{ print "failureThreshold: " (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "failureThreshold") }}
+          {{- end }}
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "periodSeconds") }}
+            {{ print "periodSeconds: " (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "periodSeconds") }}
+          {{- end }}
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "timeoutSeconds") }}
+            {{ print "timeoutSeconds: " (index .Values "probes" "eric-oss-assurance-augmentation" "livenessProbe" "timeoutSeconds") }}
+          {{- end }}
+            tcpSocket:
+            {{- if $g.security.tls.enabled }}
+              port: https-tls
+            {{- else }}
+              port: http
+            {{- end }}
+          readinessProbe:
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "initialDelaySeconds") }}
+            {{ print "initialDelaySeconds: " (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "initialDelaySeconds") }}
+          {{- end }}
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "failureThreshold") }}
+            {{ print "failureThreshold: " (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "failureThreshold") }}
+          {{- end }}
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "periodSeconds") }}
+            {{ print "periodSeconds: " (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "periodSeconds") }}
+          {{- end }}
+          {{- if (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "timeoutSeconds") }}
+            {{ print "timeoutSeconds: " (index .Values "probes" "eric-oss-assurance-augmentation" "readinessProbe" "timeoutSeconds") }}
+          {{- end }}
+            tcpSocket:
+            {{- if $g.security.tls.enabled }}
+              port: https-tls
+            {{- else }}
+              port: http
+            {{- end }}
+          env:
+          - name: JAVA_OPTS
+            value: {{ include "eric-oss-assurance-augmentation.jvmHeapSettings" . }}
+          - name: TZ
+            value: {{ template "eric-oss-assurance-augmentation.timezone" . }}
+          - name: SERVICE_ID
+            value: {{ include "eric-oss-assurance-augmentation.name" .| quote  }}
+          - name: RUN_TIME_LOG_LEVEL_CONTROL
+            value: "true"
+          - name: KUBERNETES_MASTER
+            value: {{.Values.kubernetesDefaultService.url | quote}}
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.database.secret }}
+                key: {{ .Values.database.userKey }}
+                optional: true
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.database.secret }}
+                key: {{ .Values.database.passwdKey }}
+                optional: true
+          - name: DATABASE_ADMIN_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.database.secret }}
+                key: {{ .Values.database.dbaUserKey }}
+                optional: true
+          - name: DATABASE_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.database.secret }}
+                key: {{ .Values.database.dbaPasswdKey }}
+                optional: true
+          - name: DATABASE_URL
+            value: {{ include "eric-oss-assurance-augmentation.databaseUrl" . }}
+          - name: GRACEFUL_SHUTDOWN_TIMEOUT
+            value: {{ .Values.terminationGracePeriodSeconds | quote }}
+          {{- include "eric-oss-assurance-augmentation.loggingEnv" . | indent 10}}
+          {{- if $g.security.tls.enabled }}
+            {{- include "eric-oss-assurance-augmentation.tlsEnv" . | indent 10 -}}
+          - name: CONNECT_MODE
+            value: "tls"
+            {{- if (eq .Values.service.endpoints.chassisapi.tls.enforced "required") }}
+          - name: TLS_MODE
+            value: "only_tls"
+            {{- if (eq .Values.service.endpoints.chassisapi.tls.verifyClientCertificate "required") }}
+          - name: TLS_CA
+            value: "ca_path"
+            {{- end }}
+        {{- end }}
+      {{- end }}
+          resources:
+            requests:
+            {{- if (index .Values "resources" "eric-oss-assurance-augmentation" "requests" "cpu") }}
+              cpu: {{ (index .Values "resources" "eric-oss-assurance-augmentation" "requests" "cpu" | quote) }}
+            {{- end }}
+            {{- if (index .Values "resources" "eric-oss-assurance-augmentation" "requests" "memory") }}
+              memory: {{ (index .Values "resources" "eric-oss-assurance-augmentation" "requests" "memory" | quote) }}
+            {{- end }}
+            {{- if (index .Values "resources" "eric-oss-assurance-augmentation" "requests" "ephemeral-storage") }}
+            {{ println "  ephemeral-storage:" (index .Values "resources" "eric-oss-assurance-augmentation" "requests" "ephemeral-storage" | quote) }}
+            {{- end }}
+            limits:
+            {{- if (index .Values "resources" "eric-oss-assurance-augmentation" "limits" "cpu") }}
+              cpu: {{ (index .Values "resources" "eric-oss-assurance-augmentation" "limits" "cpu" | quote) }}
+            {{- end }}
+            {{- if (index .Values "resources" "eric-oss-assurance-augmentation" "limits" "memory") }}
+              memory: {{ (index .Values "resources" "eric-oss-assurance-augmentation" "limits" "memory" | quote) }}
+            {{- end }}
+            {{- if (index .Values "resources" "eric-oss-assurance-augmentation" "limits" "ephemeral-storage") }}
+            {{ println "  ephemeral-storage:" (index .Values "resources" "eric-oss-assurance-augmentation" "limits" "ephemeral-storage" | quote) }}
+            {{- end }}
+
+      {{- if (or .Values.nodeSelector $g.nodeSelector) }}
+      nodeSelector: {{- include "eric-oss-assurance-augmentation.nodeSelector" . | indent 8 }}
+      {{- end }}
+
+      {{- if .Values.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds:
+        {{- include "eric-oss-assurance-augmentation.terminationGracePeriodSeconds" . | nindent 8 }}
+      {{- end }}
+
+      {{- if .Values.tolerations }}
+      tolerations:
+        {{- include "eric-oss-assurance-augmentation.tolerations" . | nindent 8 }}
+      {{- end }}
+
+      {{- if (index .Values "podPriority" "eric-oss-assurance-augmentation" "priorityClassName") }}
+      priorityClassName: {{ (index .Values "podPriority" "eric-oss-assurance-augmentation" "priorityClassName") }}
+      {{- end }}
+
+      {{- with .Values.topologySpreadConstraints.deployment }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- if eq .Values.affinity.podAntiAffinity "hard" }}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - {{ include "eric-oss-assurance-augmentation.name" . }}
+            topologyKey: {{ .Values.affinity.topologyKey }}
+      {{- else if eq .Values.affinity.podAntiAffinity  "soft" }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{ include "eric-oss-assurance-augmentation.name" . }}
+              topologyKey: {{ .Values.affinity.topologyKey }}
+      {{- end }}

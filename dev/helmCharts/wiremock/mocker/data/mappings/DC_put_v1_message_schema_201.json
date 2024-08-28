@@ -1,0 +1,21 @@
+{
+  "id": "00e01a30-9e6f-11ed-a8fc-0242ac120002",
+  "name": "Catalog_put_v1_message_schema_201",
+  "request": {
+    "url": "/catalog/v1/message-schema",
+    "method": "PUT",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$.messageSchema[?(@.specificationReference == '5G.Core.PM_COUNTERS.cardq_AMF_Mobility_NetworkSlice_1/1')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "data_catalog_message_schema_response_created.json"
+  }
+}

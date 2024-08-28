@@ -1,0 +1,25 @@
+{
+  "id": "00e01a30-9e6f-11ed-a8fc-0242ac120002",
+  "name": "schema_subject_returns_schema_version",
+  "request": {
+    "url": "/subjects/5G.Core.PM_COUNTERS.Invalid_Schema_Name?normalize=false&deleted=true",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "equalToJson": {"schema":"{\"type\":\"record\",\"name\":\"AMF_Mobility_NetworkSlice_1\",\"namespace\":\"5G.Core.PM_COUNTERS\",\"fields\":[{\"name\":\"dnPrefix\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"DN prefix for the sending network node\"},{\"name\":\"nodeFDN\",\"type\":\"string\",\"doc\":\"Local DN of the sending network node\"},{\"name\":\"elementType\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Type of sending network node (e.g. PCC or PCG)\"},{\"name\":\"moFdn\",\"type\":\"string\",\"doc\":\"DN of the resource being measured\"},{\"name\":\"snssai\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Unique identifier of the 5G network slice\"},{\"name\":\"snssai_sst\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Service/Slice Type\"},{\"name\":\"snssai_sd\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Slice Differentiator\"},{\"name\":\"ropBeginTime\",\"type\":\"string\",\"doc\":\"Collection begin timestamp in UTC format\"},{\"name\":\"ropEndTime\",\"type\":\"string\",\"doc\":\"Collection end timestamp in UTC format\"},{\"name\":\"suspect\",\"type\":[\"null\",\"boolean\"],\"default\":null,\"doc\":\"Reliability flag for collected data. Default is false (reliable data).\"},{\"name\":\"apn\",\"type\":[\"null\",\"string\"],\"default\":null,\"doc\":\"Apn field\"},{\"name\":\"pmCounters\",\"type\":[\"null\",{\"name\":\"pmMetricsSchema\",\"type\":\"record\",\"fields\":[{\"name\":\"VS_NS_NbrRegisteredSub_5GS\",\"type\":[\"null\",\"int\"],\"default\":null,\"doc\":\"Number of AMF subscribers\"}]}],\"default\":null}]}"}
+      }
+    ]
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/vnd.schemaregistry.v1+json",
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Vary": "Accept-Encoding, User-Agent"
+    },
+    "jsonBody": {
+      "error_code": 404,
+      "message": "Error code 40401 – Subject not found"
+    }
+  }
+}

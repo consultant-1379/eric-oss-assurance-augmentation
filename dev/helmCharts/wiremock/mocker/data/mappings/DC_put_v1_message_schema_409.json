@@ -1,0 +1,25 @@
+{
+  "id": "00e01a30-9e6f-11ed-a8fc-0242ac120002",
+  "name": "Catalog_put_v1_message_schema_409",
+  "request": {
+    "urlPath": "/catalog/v1/message-schema",
+    "method": "PUT",
+    "bodyPatterns": [
+      {
+        "equalToJson": "{\n \"Conflict\": \"409\"}"
+      }
+    ]
+  },
+  "response": {
+    "status": 409,
+    "headers": {
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "path": "/catalog/v1/message-schema",
+      "timeStamp": "2022-08-23T11:25:56.573865",
+      "message": "Message Schema already exists"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+#
+# COPYRIGHT Ericsson 2023
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+{{- $g := fromJson (include "eric-oss-assurance-augmentation.global" .) -}}
+{{- if $g.security.tls.enabled }}
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: {{ include "eric-oss-assurance-augmentation.fullname" . }}
+  labels:
+  {{- $strimzi := dict -}}
+  {{- $_ := set $strimzi "strimzi.io/cluster" .Values.spring.kafka.strimziCluster -}}
+  {{- $default := include "eric-oss-assurance-augmentation.labels" . | fromYaml -}}
+  {{- include "eric-oss-assurance-augmentation.mergeLabels" (dict "location" .Template.Name "sources" (list $strimzi $default)) | trim | nindent 4 }}
+  annotations:
+  {{- include "eric-oss-assurance-augmentation.annotations" . | nindent 4 }}
+spec:
+  authentication:
+    type: tls-external
+  authorization:
+    type: simple
+    acls:
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: Write
+      - resource:
+          type: transactionalId
+          name: '*'
+          patternType: literal
+        operation: Write
+      - resource:
+          type: transactionalId
+          name: '*'
+          patternType: literal
+        operation: Describe
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: Read
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: Create
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: Alter
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: DescribeConfigs
+      - resource:
+          type: cluster
+        operation: Create
+      - resource:
+          type: cluster
+        operation: DescribeConfigs
+      - resource:
+          type: group
+          name: '*'
+          patternType: literal
+        operation: Read
+{{- end }}

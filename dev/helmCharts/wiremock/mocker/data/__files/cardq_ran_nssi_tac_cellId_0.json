@@ -1,0 +1,18 @@
+{
+  "fields": [
+    [
+      {
+        "name": "nssi",
+        "value": "macNsiDedicated20230728x1543_qosh96mac01_nssi"
+      },
+      {
+        "name": "tac",
+        "value": "809"
+      },
+      {
+        "name": "cellId",
+        "value": "1203"
+      }
+    ]
+  ]
+}

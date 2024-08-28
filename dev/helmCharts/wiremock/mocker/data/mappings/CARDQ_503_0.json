@@ -1,0 +1,47 @@
+{
+  "name": "CARDQ_503",
+  "request": {
+    "urlPath": "/v1/augmentation-info/augmentation",
+    "method": "POST",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "inputFields": [
+            {
+              "name": "nodeFDN",
+              "value": "${json-unit.regex}^pcc-amf(1|2)$"
+            },
+            {
+              "name": "snssai",
+              "value": "${json-unit.regex}^5[0-9]-1$"
+            }
+          ],
+          "augmentationFields": [
+            {
+              "name": "ag"
+            }
+          ]
+        },
+        "ignoreArrayOrder": true
+      }
+    ]
+  },
+  "response": {
+    "status": 503,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "type": null,
+      "title": "Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.",
+      "status": 503,
+      "detail": "Service temporarily unavailable. The service cannot handle requests at this time. Please try again later.",
+      "instance": null
+    }
+  }
+}

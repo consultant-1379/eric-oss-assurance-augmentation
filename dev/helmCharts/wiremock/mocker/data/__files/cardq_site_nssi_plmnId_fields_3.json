@@ -1,0 +1,18 @@
+{
+  "fields": [
+    [
+      {
+        "name": "site",
+        "value": "GeographicSite:DataCenter3"
+      },
+      {
+        "name": "nssi",
+        "value": "NetworkSliceSubnet:NSSI-A3"
+      },
+      {
+        "name": "plmnId",
+        "value": "100-101"
+      }
+    ]
+  ]
+}

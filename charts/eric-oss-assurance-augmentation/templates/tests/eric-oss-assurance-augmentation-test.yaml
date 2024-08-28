@@ -1,0 +1,107 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template "eric-oss-assurance-augmentation.name" . }}-test
+  labels:
+  {{- include "eric-oss-assurance-augmentation.labels" . | nindent 4 }}
+  annotations:
+  {{- include "eric-oss-assurance-augmentation.annotations" . | nindent 4 }}
+    "helm.sh/hook": test-success
+spec:
+  {{- if include "eric-oss-assurance-augmentation.pullSecret" . }}
+  imagePullSecrets:
+    - name: {{ include "eric-oss-assurance-augmentation.pullSecret" . | quote}}
+  {{- end }}
+  securityContext:
+    fsGroup: {{ include "eric-oss-assurance-augmentation.fsGroup.coordinated" . }}
+  containers:
+  - name: eric-oss-assurance-augmentation-test
+    image: {{ template "eric-oss-assurance-augmentation.testImagePath" . }}
+    securityContext:
+      allowPrivilegeEscalation: false
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+      capabilities:
+          drop:
+            - all
+    resources:
+      requests:
+      {{- if (index .Values "resources" "eric-oss-assurance-augmentationTest" "requests" "cpu") }}
+        cpu: {{ (index .Values "resources" "eric-oss-assurance-augmentationTest" "requests" "cpu" | quote) }}
+      {{- end }}
+      {{- if (index .Values "resources" "eric-oss-assurance-augmentationTest" "requests" "memory") }}
+        memory: {{ (index .Values "resources" "eric-oss-assurance-augmentationTest" "requests" "memory" | quote) }}
+      {{- end }}
+      {{- if (index .Values "resources" "eric-oss-assurance-augmentationTest" "requests" "ephemeral-storage") }}
+      {{ println "  ephemeral-storage:" (index .Values "resources" "eric-oss-assurance-augmentationTest" "requests" "ephemeral-storage" | quote) }}
+      {{- end }}
+      limits:
+      {{- if (index .Values "resources" "eric-oss-assurance-augmentationTest" "limits" "cpu") }}
+        cpu: {{ (index .Values "resources" "eric-oss-assurance-augmentationTest" "limits" "cpu" | quote) }}
+      {{- end }}
+      {{- if (index .Values "resources" "eric-oss-assurance-augmentationTest" "limits" "memory") }}
+        memory: {{ (index .Values "resources" "eric-oss-assurance-augmentationTest" "limits" "memory" | quote) }}
+      {{- end }}
+      {{- if (index .Values "resources" "eric-oss-assurance-augmentationTest" "limits" "ephemeral-storage") }}
+      {{ println "  ephemeral-storage:" (index .Values "resources" "eric-oss-assurance-augmentationTest" "limits" "ephemeral-storage" | quote) }}
+      {{- end }}
+  restartPolicy: Never
+  {{- if .Values.tolerations }}
+  tolerations:
+    {{- include "eric-oss-assurance-augmentation.tolerations" . | nindent 8 }}
+  {{- end }}
+  {{- with .Values.topologySpreadConstraints.test }}
+  topologySpreadConstraints:
+    {{- toYaml . | nindent 6 }}
+  {{- end }}
+  {{- if .Values.terminationGracePeriodSeconds }}
+  terminationGracePeriodSeconds:
+    {{- include "eric-oss-assurance-augmentation.terminationGracePeriodSeconds" . | nindent 8 }}
+  {{- end }}
+  {{- if (index .Values "podPriority" "eric-oss-assurance-augmentation" "priorityClassName") }}
+  priorityClassName: {{ (index .Values "podPriority" "eric-oss-assurance-augmentation" "priorityClassName") }}
+  {{- end }}
+  {{- if eq .Values.affinity.podAntiAffinity "hard" }}
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - {{ include "eric-oss-assurance-augmentation.name" . }}
+        topologyKey: "kubernetes.io/hostname"
+  {{- else if eq .Values.affinity.podAntiAffinity  "soft" }}
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - {{ include "eric-oss-assurance-augmentation.name" . }}
+          topologyKey: "kubernetes.io/hostname"
+  {{- end }}
+  nodeSelector: {{ include "eric-oss-assurance-augmentation.nodeSelector" . | indent 4 }}

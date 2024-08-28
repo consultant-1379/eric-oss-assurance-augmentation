@@ -1,0 +1,19 @@
+{
+  "id": "71055f76-ca5e-11ed-afa1-0242ac120002",
+  "name": "schema_specific_subject_schema",
+  "request": {
+    "url": "/subjects/5G.Core.PM_COUNTERS.Invalid_Schema_Name/versions/latest",
+    "method": "GET"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "error_code": 404,
+      "message": "Error code 40401 – Subject not found"
+    }
+  }
+}

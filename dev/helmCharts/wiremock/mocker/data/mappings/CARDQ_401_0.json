@@ -1,0 +1,47 @@
+{
+  "name": "CARDQ_401",
+  "request": {
+    "urlPath": "/v1/augmentation-info/augmentation",
+    "method": "POST",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "inputFields": [
+            {
+              "name": "nodeFDN",
+              "value": "${json-unit.regex}^pcc-amf(1|2)$"
+            },
+            {
+              "name": "snssai",
+              "value": "${json-unit.regex}^4[0-9]-1$"
+            }
+          ],
+          "augmentationFields": [
+            {
+              "name": "ag"
+            }
+          ]
+        },
+        "ignoreArrayOrder": true
+      }
+    ]
+  },
+  "response": {
+    "status": 401,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "type": null,
+      "title": "Error occurred Unauthorized",
+      "status": 401,
+      "detail": "401 UNAUTHORIZED: \"Unauthorized\"",
+      "instance": null
+    }
+  }
+}

@@ -1,0 +1,43 @@
+#
+# COPYRIGHT Ericsson 2023
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+description: Not able to register a ARDQ Registration
+name: given ARDQ Registration with this ID already exists
+request:
+  method: POST
+  urlPath: /v1/augmentation/registration/ardq
+  headers:
+    Content-Type: application/json
+  body:
+    ardqId: cardq
+    ardqUrl: http://eric-oss-cardq:8080
+    ardqType: core
+    rules:
+      - inputSchema: 5G|PM_COUNTERS|AMF_Mobility_NetworkSlice_1
+        fields:
+          - output: outputField1
+            input:
+              - inputField1
+              - inputField2
+response:
+  status: 409
+  body:
+    type: about:blank
+    title: Conflict
+    status: 409
+    detail: "Provided ARDQ ID: [cardq] already exists!"
+    instance: null
+

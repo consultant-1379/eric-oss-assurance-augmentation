@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wiremock.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "wiremock.name" . }}
+    helm.sh/chart: {{ include "wiremock.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "wiremock.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        checksum/configMappings: {{ include (print $.Template.BasePath "/configmap-mappings.yaml") . | sha256sum }}
+        checksum/configResponses: {{ include (print $.Template.BasePath "/configmap-responses.yaml") . | sha256sum }}
+      labels:
+        app.kubernetes.io/name: {{ include "wiremock.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.global.security.tls.enabled }}
+          args:
+            - "--port"
+            - "{{ .Values.service.httpPort }}"
+            - "--https-port"
+            - "{{ .Values.service.httpsPort }}"
+            - "--https-keystore"
+            - "/shared-data/keystore.jks"
+            - "--https-require-client-cert"
+            - "true"
+            - "--https-truststore"
+            - "/shared-data/truststore.jks"
+          {{- else }}
+          args:
+            - "--port"
+            - "{{ .Values.service.httpPort }}"
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.httpPort }}
+              protocol: TCP
+            {{- if .Values.global.security.tls.enabled }}
+            - name: https
+              containerPort: {{ .Values.service.httpsPort }}
+              protocol: TCP
+            {{- end }}
+          volumeMounts:
+          - mountPath: /home/wiremock/mappings
+            name: mappings-volume
+          - mountPath: /home/wiremock/__files
+            name: responses-volume
+          - mountPath: /shared-data
+            name: shared-data
+      volumes:
+        - name: mappings-volume
+          configMap:
+            name: {{ include "wiremock.fullname" . }}-mappings-configs
+        - name: responses-volume
+          configMap:
+            name: {{ include "wiremock.fullname" . }}-responses-configs
+        - name: root-cert-volume
+          secret:
+            optional: true
+            secretName: eric-sec-sip-tls-trusted-root-cert
+        - name: wiremock-cert-volume
+          secret:
+            optional: true
+            secretName: {{ include "wiremock.fullname" . }}-cert
+        - name: shared-data
+          emptyDir: {}
+      initContainers:
+      - name: init-certs
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      {{- if .Values.global.security.tls.enabled }}
+        command:
+        - bash
+        - -c
+        - |
+          sleep 5
+          cp -R ../../certs/wiremock-cert/ ../../shared-data
+          cp -R ../../certs/eric-sec-sip-tls-trusted-root-cert/ ../../shared-data
+          openssl pkcs12 -export -in ../../certs/wiremock-cert/tls.crt -inkey ../../certs/wiremock-cert/tls.key -out /shared-data/keystore.p12 -password pass:password
+          keytool -importkeystore -srckeystore /shared-data/keystore.p12 -srcstoretype PKCS12 -destkeystore /shared-data/keystore.jks -deststoretype JKS -srcstorepass password -deststorepass password
+          yes | keytool -importcert -alias wiremock_trust -file ../../certs/eric-sec-sip-tls-trusted-root-cert/ca.crt -keystore /shared-data/truststore.jks -storepass password -storetype JKS
+          ls -l ../../shared-data/wiremock-cert
+      {{- else }}
+        command: ["echo"]
+        args: ["TLS is disabled"]
+      {{- end }}
+        volumeMounts:
+          - name: root-cert-volume
+            mountPath: /certs/eric-sec-sip-tls-trusted-root-cert
+            readOnly: true
+          - name: wiremock-cert-volume
+            mountPath: /certs/wiremock-cert
+            readOnly: true
+          - mountPath: /shared-data
+            name: shared-data

@@ -1,0 +1,4 @@
+global:
+  pullSecret: k8s-registry
+  log:
+    streamingMethod: indirect

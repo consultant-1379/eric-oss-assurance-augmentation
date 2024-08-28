@@ -1,0 +1,16 @@
+{
+  "fields": [
+    [
+      {
+        "name": "nsi",
+        "value": "ManualDataSet-NetworkSlice-A"
+      }
+    ],
+    [
+      {
+        "name": "nsi",
+        "value": "ManualDataSet-NetworkSlice-B"
+      }
+    ]
+  ]
+}

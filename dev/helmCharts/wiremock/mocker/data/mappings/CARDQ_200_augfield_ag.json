@@ -1,0 +1,462 @@
+{
+  "mappings": [
+    {
+      "name": "CARDQ_200_ag_empty_snssai",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                { "name": "snssai",
+                  "value": ""
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }]
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_all.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_empty_snssai_with_core_query_type",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                { "name": "snssai",
+                  "value": ""
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_all.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_no_snssai",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }]
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_all.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_no_snssai_with_core_query_type",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_all.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_10to19",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^(1[0-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }]
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_slice_B.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_10to19_with_core_query_type",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^(1[0-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_slice_B.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_1to9",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^([1-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }]
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_slice_A.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_1to9_with_core_query_type",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "${json-unit.regex}^pcc-amf(1|2)$"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^([1-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_slice_A.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_20to29_amf1",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "pcc-amf1"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^(2[0-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }]
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "jsonBody": {
+          "fields": []
+        }
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_20to29_amf1_with_core_query_type",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "pcc-amf1"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^(2[0-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "jsonBody": {
+          "fields": []
+        }
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_20to29_amf2",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "pcc-amf2"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^(2[0-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }]
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_slice_B.json"
+      }
+    },
+    {
+      "name": "CARDQ_200_ag_with_snssai_20to29_amf2_with_core_query_type",
+      "request": {
+        "urlPath": "/v1/augmentation-info/augmentation",
+        "method": "POST",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/json"
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "inputFields": [
+                {
+                  "name": "nodeFDN",
+                  "value": "pcc-amf2"
+                },
+                {
+                  "name": "snssai",
+                  "value": "${json-unit.regex}^(2[0-9])-1$"
+                }
+              ],
+              "augmentationFields": [{ "name": "ag" }],
+              "queryType": "core"
+            },
+            "ignoreArrayOrder" : true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}"
+        },
+        "bodyFileName": "cardq_only_ag_slice_B.json"
+      }
+    }
+
+
+  ]
+}

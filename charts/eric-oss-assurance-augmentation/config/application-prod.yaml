@@ -1,0 +1,186 @@
+#
+# COPYRIGHT Ericsson 2023
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+dmm:
+  schemaRegistry:
+    url: {{ .Values.dmm.schemaRegistry.url }}
+  dataCatalog:
+    url: {{ .Values.dmm.dataCatalog.url }}
+
+analytics:
+  target: {{ .Values.analytics.target }}
+
+spring:
+  kafka:
+    heartbeat:
+      initialDelay: {{ .Values.spring.kafka.heartbeat.initialDelay | int }}
+      fixedDelay: {{ .Values.spring.kafka.heartbeat.fixedDelay | int }}
+    admin:
+      retry: {{ .Values.spring.kafka.admin.retry | int }}
+      retryBackoffMs: {{ .Values.spring.kafka.admin.retryBackoffMs | int }}
+      reconnectBackoffMs: {{ .Values.spring.kafka.admin.reconnectBackoffMs | int }}
+      reconnectBackoffMaxMs: {{ .Values.spring.kafka.admin.reconnectBackoffMaxMs | int }}
+      requestTimeoutMs: {{ .Values.spring.kafka.admin.requestTimeoutMs | int }}
+      retryInterval: {{ .Values.spring.kafka.admin.retryInterval | int }}
+  {{- $g := fromJson (include "eric-oss-assurance-augmentation.global" .) -}}
+  {{- if $g.security.tls.enabled }}
+    bootstrapServers: {{ .Values.spring.kafka.bootstrapServersMtls }}
+  {{- else }}
+    bootstrapServers: {{ .Values.spring.kafka.bootstrapServers }}
+  {{- end }}
+    autoConfigTopics:
+      notification:
+        name: {{ include "eric-oss-assurance-augmentation.name" . }}-notification
+        partitions: {{ .Values.spring.kafka.autoConfigTopics.notification.partitions }}
+        replicas: {{ .Values.spring.kafka.autoConfigTopics.notification.replicas | int }}
+        retention: {{ .Values.spring.kafka.autoConfigTopics.notification.retention | int }}
+        minInSyncReplicas: {{ .Values.spring.kafka.autoConfigTopics.notification.minInSyncReplicas | int }}
+      augmentationProcessing:
+        name: {{ include "eric-oss-assurance-augmentation.name" . }}-processing
+        partitions: {{ .Values.spring.kafka.autoConfigTopics.augmentationProcessing.partitions | int }}
+        replicas: {{ .Values.spring.kafka.autoConfigTopics.augmentationProcessing.replicas | int }}
+        compression: {{ .Values.spring.kafka.autoConfigTopics.augmentationProcessing.compression }}
+        retention: {{ .Values.spring.kafka.autoConfigTopics.augmentationProcessing.retention | int }}
+        minInSyncReplicas: {{ .Values.spring.kafka.autoConfigTopics.augmentationProcessing.minInSyncReplicas }}
+    registrationNotification:
+      topic: {{ include "eric-oss-assurance-augmentation.name" . }}-notification
+      consumer:
+        maxPollRecords: {{ .Values.spring.kafka.registrationNotification.consumer.maxPollRecords | int }}
+        maxPollIntervalMs: {{ .Values.spring.kafka.registrationNotification.consumer.maxPollIntervalMs | int }}
+      producer:
+        requestTimeoutMs: {{ .Values.spring.kafka.registrationNotification.producer.requestTimeoutMs | int }}
+    augmentationProcessing:
+      topic: {{ include "eric-oss-assurance-augmentation.name" . }}-processing
+      consumer:
+        maxPollRecords: {{ .Values.spring.kafka.augmentationProcessing.consumer.maxPollRecords | int }}
+        maxPollIntervalMs: {{ .Values.spring.kafka.augmentationProcessing.consumer.maxPollIntervalMs | int }}
+      producer:
+        requestTimeoutMs: {{ .Values.spring.kafka.augmentationProcessing.producer.requestTimeoutMs | int }}
+        retryBackoffMs: {{ .Values.spring.kafka.augmentationProcessing.producer.retryBackoffMs | int }}
+        reconnectBackoffMs: {{ .Values.spring.kafka.augmentationProcessing.producer.reconnectBackoffMs | int }}
+        reconnectBackoffMaxMs: {{ .Values.spring.kafka.augmentationProcessing.producer.reconnectBackoffMaxMs | int }}
+        batchSize: {{ .Values.spring.kafka.augmentationProcessing.producer.batchSize | int }}
+        bufferMemory: {{ .Values.spring.kafka.augmentationProcessing.producer.bufferMemory | int }}
+        maxRequestSize: {{ .Values.spring.kafka.augmentationProcessing.producer.maxRequestSize | int }}
+        linger: {{ .Values.spring.kafka.augmentationProcessing.producer.linger | int }}
+    availability:
+      retryInterval: {{ .Values.spring.kafka.availability.retryInterval | int }}
+      retryAttempts: {{ .Values.spring.kafka.availability.retryAttempts | int }}
+  # graceful shutdown wait period for serving in-flight requests
+  lifecycle:
+    timeout-per-shutdown-phase: ${GRACEFUL_SHUTDOWN_TIMEOUT:30s}
+  flyway:
+    create-schemas: {{ include "eric-oss-assurance-augmentation.createSchema" . }}
+    schemas: {{ .Values.database.schemaName }}
+    default-schema: {{ .Values.database.schemaName }}
+    url: ${DATABASE_URL}
+{{- if eq (include "eric-oss-assurance-augmentation.createSchema" .) "true" }}
+    user: ${DATABASE_ADMIN_USERNAME}
+    password: ${DATABASE_ADMIN_PASSWORD}
+{{- else }}
+    user: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+{{- end }}
+    connectRetries: {{ .Values.database.connectRetries }}
+    validate-on-migrate: false
+    placeholders:
+      augmentSchemaName: {{ .Values.database.schemaName }}
+      databaseUser: ${DATABASE_USERNAME}
+  datasource:
+    hikari:
+      enabled: true
+      jdbc-url: ${DATABASE_URL}
+      username: ${DATABASE_USERNAME}
+      password: ${DATABASE_PASSWORD}
+      driver-class-name: org.postgresql.Driver
+      schema: {{ .Values.database.schemaName }}
+resilience4j:
+  circuitbreaker:
+    instances:
+      schemaRegistry:
+        failureRateThreshold: {{ .Values.dmm.schemaRegistry.circuitBreaker.failureRateThreshold }}
+        minimumNumberOfCalls: {{ .Values.dmm.schemaRegistry.circuitBreaker.minimumNumberOfCalls }}
+        waitDurationInOpenState: {{ .Values.dmm.schemaRegistry.circuitBreaker.waitDurationInOpenState | int }}
+        permittedNumberOfCallsInHalfOpenState: {{ .Values.dmm.schemaRegistry.circuitBreaker.permittedNumberOfCallsInHalfOpenState }}
+        slidingWindowSize: {{ .Values.dmm.schemaRegistry.circuitBreaker.slidingWindowSize }}
+        slidingWindowType: {{ .Values.dmm.schemaRegistry.circuitBreaker.slidingWindowType }}
+      dataCatalog:
+        failureRateThreshold: {{ .Values.dmm.dataCatalog.circuitBreaker.failureRateThreshold }}
+        minimumNumberOfCalls: {{ .Values.dmm.dataCatalog.circuitBreaker.minimumNumberOfCalls }}
+        waitDurationInOpenState: {{ .Values.dmm.dataCatalog.circuitBreaker.waitDurationInOpenState | int }}
+        permittedNumberOfCallsInHalfOpenState: {{ .Values.dmm.dataCatalog.circuitBreaker.permittedNumberOfCallsInHalfOpenState }}
+        slidingWindowSize: {{ .Values.dmm.dataCatalog.circuitBreaker.slidingWindowSize }}
+        slidingWindowType: {{ .Values.dmm.dataCatalog.circuitBreaker.slidingWindowType }}
+      ardq:
+        failureRateThreshold: {{  .Values.ardq.circuitBreaker.failureRateThreshold }}
+        minimumNumberOfCalls: {{ .Values.ardq.circuitBreaker.minimumNumberOfCalls }}
+        waitDurationInOpenState: {{ .Values.ardq.circuitBreaker.waitDurationInOpenState | int }}
+        permittedNumberOfCallsInHalfOpenState: {{ .Values.ardq.circuitBreaker.permittedNumberOfCallsInHalfOpenState }}
+        slidingWindowSize: {{ .Values.ardq.circuitBreaker.slidingWindowSize }}
+        slidingWindowType: {{ .Values.ardq.circuitBreaker.slidingWindowType }}
+
+  retry:
+    instances:
+      ardq:
+        max-attempts: {{ .Values.ardq.retry.maxAttempts }}
+        wait-duration: {{ .Values.ardq.retry.waitDuration }}
+        enable-exponential-backoff: {{ .Values.ardq.retry.enableExponentialBackoff }}
+        exponential-backoff-multiplier: {{ .Values.ardq.retry.exponentialBackoffMultiplier }}
+      dataCatalog:
+        max-attempts: {{ .Values.dmm.dataCatalog.retry.maxAttempts }}
+        wait-duration: {{ .Values.dmm.dataCatalog.retry.waitDuration }}
+        enable-exponential-backoff: {{ .Values.dmm.dataCatalog.retry.enableExponentialBackoff }}
+        exponential-backoff-multiplier: {{ .Values.dmm.dataCatalog.retry.exponentialBackoffMultiplier }}
+      schemaRegistry:
+        max-attempts: {{ .Values.dmm.schemaRegistry.retry.maxAttempts }}
+        wait-duration: {{ .Values.dmm.schemaRegistry.retry.waitDuration }}
+        enable-exponential-backoff: {{ .Values.dmm.schemaRegistry.retry.enableExponentialBackoff }}
+        exponential-backoff-multiplier: {{ .Values.dmm.schemaRegistry.retry.exponentialBackoffMultiplier }}
+      jdbc:
+        max-attempts: {{ .Values.database.retry.maxAttempts }}
+        wait-duration: {{ .Values.database.retry.waitDuration }}
+        enable-exponential-backoff: {{ .Values.database.retry.enableExponentialBackoff }}
+        exponential-backoff-multiplier: {{ .Values.database.retry.exponentialBackoffMultiplier }}
+
+server:
+  shutdown: graceful
+  port: {{ include "eric-oss-assurance-augmentation.service-port" . }}
+
+# Required configuration to change the logging level at runtime using the EO Common Logging library
+ericsson:
+  logging:
+    runtime-level-control:
+      enabled: true
+
+{{- if $g.security.tls.enabled }}
+# Configuration of the 2PP Certificate Reloader library used for setting up TLS
+adp-certificate:
+  discovery:
+    root-read-path: /run/secrets
+    keystore-relative-dir: keystore
+    truststore-relative-dir: truststore
+    root-write-path: /tmp
+    keyPassword: ${TLS_KEYSTORE_KEY_PASSWORD}
+    password: ${TLS_KEYSTORE_PASSWORD}
+
+# General security configuration
+security:
+  # Default time period in milliseconds to periodically generate a new SSL context iff certificate rotation has occurred
+  sampleWindowDurationMs: 5000
+  server:
+    mtls:
+      enabled: true
+{{- end }}

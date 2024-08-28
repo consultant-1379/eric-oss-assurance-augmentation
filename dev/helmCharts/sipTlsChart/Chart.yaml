@@ -1,0 +1,21 @@
+apiVersion: v3
+name: sip-tls-env
+description: A Helm chart for sip-tls. Cannot be deployed in a local k8s cluster.
+
+type: application
+version: 0.1.0
+appVersion: '1.0.0'
+
+dependencies:
+  - name: eric-data-distributed-coordinator-ed
+    repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-released-helm
+    version: ">0.0.0-0"
+    condition: eric-data-distributed-coordinator-ed.enabled
+  - name: eric-sec-key-management
+    repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-released-helm
+    version: ">0.0.0-0"
+    condition: eric-sec-key-management.enabled
+  - name: eric-sec-sip-tls
+    repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-released-helm
+    version: ">0.0.0-0"
+    condition: eric-sec-sip-tls.enabled

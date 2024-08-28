@@ -1,0 +1,25 @@
+{
+  "id": "00e01a30-9e6f-11ed-a8fc-0242ac120002",
+  "name": "DC_get_v1_data_type_400",
+  "request": {
+    "urlPath": "/catalog/v1/data-type",
+    "method": "GET",
+    "queryParameters": {
+      "invalidQueryParameters": {
+        "equalTo": "invalid"
+      }
+    }
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Date": "{{now timezone='GMT' format='EEE, dd MMM yyyy HH:mm:ss z'}}",
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "path": "/catalog/v1/data-type",
+      "timeStamp": "2023-03-15T20:39:33.797Z",
+      "message": "Invalid Query Params - Allowed QueryParams(dataSpace, dataCategory, dataProvider, schemaName, schemaVersion, serviceName, isExternal)"
+    }
+  }
+}

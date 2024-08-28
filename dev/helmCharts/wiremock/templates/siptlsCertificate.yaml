@@ -1,0 +1,16 @@
+{{- if .Values.global.security.tls.enabled }}
+apiVersion: siptls.sec.ericsson.com/v1
+kind: InternalCertificate
+metadata:
+  name: {{ include "wiremock.fullname" . }}-cert
+spec:
+  kubernetes:
+    generatedSecretName: {{ include "wiremock.fullname" . }}-cert
+    secretType: tls
+  certificate:
+    subject:
+      cn: {{ include "wiremock.fullname" . }}
+    extendedKeyUsage:
+      tlsClientAuth: false
+      tlsServerAuth: true
+{{- end }}
